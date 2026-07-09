@@ -1,167 +1,205 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Drone Services — Commercial B2B &amp; Landowner | CSRA Precision Imaging Augusta GA</title>
-<meta name="description" content="FAA Part 107 certified thermal drone services in Augusta, GA. Commercial roof moisture assessments and B2B aerial data — plus wildlife recovery and nuisance animal detection for landowners and hunters.">
-<meta name="keywords" content="thermal drone Augusta GA, drone roof assessment Augusta, wildlife recovery drone CSRA, commercial drone services Augusta GA, feral hog detection Georgia">
-<link rel="canonical" href="https://www.csraprecisionimaging.com/services.html">
-<meta property="og:title" content="Drone Services — CSRA Precision Imaging"><meta property="og:image" content="https://www.csraprecisionimaging.com/images/og-image.svg">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/style.css">
-<style>
-.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:10px} @media(max-width:760px){.path-grid{grid-template-columns:1fr}}
-.path-card{border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;text-decoration:none}
-.path-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
-.path-stripe{height:5px}
-.com-stripe{background:var(--amber)} .lan-stripe{background:var(--amber)}
-.path-body{padding:40px 34px 36px;flex:1;display:flex;flex-direction:column}
-.path-body h2{font-size:clamp(1.5rem,2.8vw,2.2rem);margin-bottom:12px}
-.path-body p{font-size:.95rem;line-height:1.72;color:var(--smoke);margin-bottom:18px}
-.path-body ul{list-style:none;margin-bottom:24px;flex:1;display:flex;flex-direction:column;gap:8px}
-.path-body ul li{display:flex;gap:10px;font-size:.91rem;color:var(--smoke)}
-.path-body ul li::before{content:'→';font-weight:700;flex-shrink:0}
-.com-card{background:linear-gradient(155deg,#2d3d55 0%,#1e2d42 100%);border:1px solid rgba(244,160,35,.3)}
-.lan-card{background:linear-gradient(155deg,#2d3545 0%,#1e2a3e 100%);border:1px solid rgba(244,160,35,.3)}
-.com-card .path-body ul li::before{color:var(--amber)}
-.lan-card .path-body ul li::before{color:var(--amber)}
-.lan-card h2 em{color:var(--amber)}
-.aud-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-.aud{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
-.aud.c{background:rgba(244,160,35,.1);color:var(--amber);border:1px solid rgba(244,160,35,.25)}
-.aud.l{background:rgba(244,160,35,.08);color:var(--amber);border:1px solid rgba(244,160,35,.25)}
-.btn-land{background:var(--amber);color:#1a2e1a;display:inline-flex;align-items:center;gap:8px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:13px 26px;border-radius:4px;border:none;cursor:pointer;transition:background .2s,transform .2s;text-decoration:none}
-.btn-land:hover{background:var(--amber-light);transform:translateY(-2px)}
-@media(max-width:760px){.path-grid{grid-template-columns:1fr}}
-</style>
-<script defer src="/_vercel/insights/script.js"></script>
-</head>
-<body>
-<header class="site-header">
-  <nav class="nav" aria-label="Main">
-    <a class="brand" href="index.html"><img src="images/logo.svg" alt="CSRA Precision Imaging logo" width="40" height="40"><span><span class="bt">CSRA <span>Precision</span> Imaging</span><span class="bs">LLC</span></span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li class="nav-dropdown">
-      <a href="services.html" class="ddtoggle" aria-current="page">Services</a>
-      <div class="nav-dropdown-menu">
-        <a href="services-commercial.html">🏢 Commercial &amp; B2B</a>
-        <div class="dm-divider"></div>
-        <a href="services-landowner.html">🦌 Landowner &amp; Outdoor</a>
-      </div>
-    </li>
-      
-      <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a class="cta" href="contact.html">Get a Quote</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
-  </nav>
-</header>
-<main>
-<section class="section" style="padding-top:64px;padding-bottom:24px"><div class="wrap reveal">
-  <span class="eyebrow">Our Services</span>
-  <h1 style="margin-bottom:14px">What Can We <em>Fly For You?</em></h1>
-  <p class="lead">Every flight is operated by an FAA Part 107 certified pilot using the enterprise-grade DJI Matrice 4TD, backed by $1 million in commercial liability insurance. Choose your path below.</p>
-</div></section>
-<div class="trust"><div class="trust-inner">
-  <span><b>✈</b> FAA Part 107 Certified</span>
-  <span><b>🌡️</b> ITC Level I sUAS Certified Infrared Thermographer</span>
-  <span><b>🛡</b> $1M Commercial Liability</span>
-  <span><b>📡</b> DJI Matrice 4TD Enterprise</span>
-</div></div>
-<section class="section" style="padding-top:40px"><div class="wrap">
-  <div class="path-grid">
-    <a class="path-card com-card reveal" href="services-commercial.html">
-      <div class="path-stripe com-stripe"></div>
-      <div class="path-body">
-        <span class="eyebrow" style="margin-bottom:10px">For Professionals</span>
-        <h2>Commercial &amp; <em>Industrial B2B</em></h2>
-        <p>Enterprise aerial data collection for roofing contractors, insurance adjusters, property managers, solar operators, and construction teams. Thermal assessments are read by an ITC-certified infrared thermographer, with deliverables formatted for insurance workflows and engineering review.</p>
-        <div class="aud-row">
-          <span class="aud c">Roofing Contractors</span><span class="aud c">Insurance Adjusters</span>
-          <span class="aud c">Property Managers</span><span class="aud c">Solar Operators</span><span class="aud c">Construction</span>
-        </div>
-        <ul>
-          <li>Thermal roof moisture assessments (RGB + radiometric IR)</li>
-          <li>Solar panel thermal performance mapping</li>
-          <li>Construction progress documentation &amp; 3D modeling</li>
-          <li>Insurance &amp; adjuster-ready deliverable packages</li>
-          <li>Volume pricing &amp; commercial account agreements</li>
-        </ul>
-        <span class="btn btn-primary" style="width:fit-content">View Commercial Services →</span>
-      </div>
-    </a>
-    <a class="path-card lan-card reveal" href="services-landowner.html">
-      <div class="path-stripe lan-stripe"></div>
-      <div class="path-body">
-        <span class="eyebrow" style="color:var(--amber);margin-bottom:10px">For Landowners &amp; Hunters</span>
-        <h2>Landowner &amp; <em>Outdoor Services</em></h2>
-        <p>Thermal drone services built around what landowners, hunters, and farmers actually need — from recovering a downed deer after dark to mapping feral hog pressure across hundreds of acres before the season starts.</p>
-        <div class="aud-row">
-          <span class="aud l">Deer Hunters</span><span class="aud l">Hog Hunters</span>
-          <span class="aud l">Farmers &amp; Ag</span><span class="aud l">Hunting Clubs</span><span class="aud l">Landowners</span>
-        </div>
-        <ul>
-          <li>Post-hunt wildlife recovery — day &amp; night thermal search</li>
-          <li>Feral hog &amp; predator detection with GPS mapping</li>
-          <li>Wildlife population counts &amp; herd assessments</li>
-          <li>Crop damage documentation</li>
-          <li>Same-day &amp; after-hours availability</li>
-        </ul>
-        <span class="btn btn-primary" style="width:fit-content">View Landowner Services →</span>
-      </div>
-    </a>
-  </div>
-  <div style="text-align:center;margin-top:24px">
-    <p style="font-size:.88rem;color:var(--muted);margin-bottom:10px">All rates set 10% below regional market averages. Introductory pricing through Oct 31, 2026.</p>
-    <a class="btn btn-ghost" href="pricing.html">View Full Pricing →</a>
-  </div>
-</div></section>
-<div class="divider"></div>
-<section class="section bg-mid"><div class="wrap">
-  <div class="equip">
-    <div class="equip-card reveal">
-      <div class="dn">DJI Matrice 4TD</div><div class="ds">Enterprise dual-sensor commercial drone</div>
-      <div class="spec-grid">
-        <div class="spec-tile"><div class="sl">RGB Camera</div><div class="sv">48MP / 4K</div></div>
-        <div class="spec-tile"><div class="sl">Thermal</div><div class="sv">640×512 IR VOx</div></div>
-        <div class="spec-tile"><div class="sl">Flight Time</div><div class="sv">~42 min</div></div>
-        <div class="spec-tile"><div class="sl">Wind Resist.</div><div class="sv">15 m/s</div></div>
-        <div class="spec-tile"><div class="sl">Transmission</div><div class="sv">20 km O3</div></div>
-        <div class="spec-tile"><div class="sl">Obstacle Avoid</div><div class="sv">Omnidirectional</div></div>
-      </div>
+================================================================
+  CSRA PRECISION IMAGING — LAUNCH CHECKLIST
+  Read this top to bottom. Do each step in order.
+  Estimated time: about 20 minutes.
+================================================================
+
+Before you start, make sure you have:
+  ✅ This folder (csra-precision-imaging) on your computer
+  ✅ A phone or email address handy for account sign-ups
+
+
+────────────────────────────────────────────────────────────────
+STEP 1 — Update your phone number (2 minutes)
+────────────────────────────────────────────────────────────────
+
+The site currently says [Your Phone Number] in a few places.
+Here's how to fix that:
+
+  1. Open the csra-precision-imaging folder on your computer.
+
+  2. Right-click the file called  index.html
+     → Choose "Open with" → Notepad (Windows) or TextEdit (Mac)
+
+  3. Press Ctrl+H (Windows) or Cmd+Option+F (Mac)
+     This opens Find & Replace.
+
+  4. In the "Find" box type:    [Your Phone Number]
+     In the "Replace" box type: your actual phone number
+     Click "Replace All"
+
+  5. Save the file (Ctrl+S or Cmd+S), then close it.
+
+  6. Repeat steps 2-5 for these files:
+       services.html
+       gallery.html
+       about.html
+       contact.html
+
+  ✅ Done when: all 5 files have your real phone number.
+
+
+────────────────────────────────────────────────────────────────
+STEP 2 — Set up your contact form (5 minutes)
+────────────────────────────────────────────────────────────────
+
+This makes the quote form on your Contact page actually send
+you an email when someone fills it out.
+
+  1. Go to:  https://formspree.io
+     Click "Get Started" and create a free account.
+     (Use your business email address.)
+
+  2. Once logged in, click "+ New Form"
+     Name it something like "CSRA Quote Form"
+     Click "Create Form"
+
+  3. You'll see a line that looks like this:
+       action="https://formspree.io/f/xpwzabcd"
+     The part after the last slash is your Form ID.
+     It's 8 characters — something like  xpwzabcd
+     Copy it.
+
+  4. Open  contact.html  in Notepad/TextEdit (same as Step 1).
+
+  5. Press Ctrl+H (Windows) or Cmd+Option+F (Mac)
+     In the "Find" box type:    YOUR_FORM_ID
+     In the "Replace" box type: your actual ID from step 3
+                                 (e.g.  xpwzabcd)
+     Click "Replace All"
+
+  6. Save and close contact.html.
+
+  7. Back in Formspree, go to Settings → Notifications
+     Make sure your email address is listed so you get
+     emailed every time someone submits the form.
+
+  ✅ Done when: YOUR_FORM_ID has been replaced with real letters.
+
+
+────────────────────────────────────────────────────────────────
+STEP 3 — Deploy to Vercel (5 minutes)
+────────────────────────────────────────────────────────────────
+
+  1. Go to:  https://vercel.com
+     Click "Sign Up" → sign up with your email.
+     (Free account — no credit card needed.)
+
+  2. In a NEW browser tab, go to:  https://vercel.com/drop
+
+  3. On your computer, find the csra-precision-imaging FOLDER
+     (not a file inside it — the whole folder).
+
+  4. Drag the entire  csra-precision-imaging  folder into
+     the browser window at vercel.com/drop.
+
+  5. It will ask you to pick a project name.
+     Type something like:  csra-precision-imaging
+     Click "Deploy"
+
+  6. Wait about 30 seconds. Vercel will show you a green
+     checkmark and a link like:
+       csra-precision-imaging.vercel.app
+
+  7. Click that link. Your site is live on the internet! 🎉
+
+  ✅ Done when: you can see your website at a .vercel.app address.
+
+
+────────────────────────────────────────────────────────────────
+STEP 4 — Test your contact form (2 minutes)
+────────────────────────────────────────────────────────────────
+
+  1. Go to your live site and click "Get a Quote"
+
+  2. Fill out the form with your own name and email, then
+     submit it.
+
+  3. Check your email inbox — you should receive a notification
+     from Formspree within a minute or two.
+
+  4. If it doesn't arrive, check your spam folder.
+     If it's still not working, double-check that you replaced
+     YOUR_FORM_ID correctly in Step 2.
+
+  ✅ Done when: you receive the test email.
+
+
+────────────────────────────────────────────────────────────────
+STEP 5 — Connect your real domain (optional, ~10 min)
+────────────────────────────────────────────────────────────────
+
+Right now your site is at something.vercel.app.
+To use csraprecisionimaging.com instead:
+
+  1. Buy your domain at Namecheap (namecheap.com) if you
+     haven't yet. Search for csraprecisionimaging.com
+     and check it out. (~$12/year)
+
+  2. In your Vercel dashboard, click your project →
+     "Settings" → "Domains" → "Add Domain"
+     Type: csraprecisionimaging.com → click Add
+
+  3. Vercel will show you two DNS records to add.
+     Copy them — you'll need them in the next step.
+
+  4. Log in to Namecheap → click "Manage" on your domain →
+     click "Advanced DNS" → paste in the records Vercel gave you.
+     (If you're stuck, Namecheap has live chat support.)
+
+  5. Wait 10-30 minutes. Vercel checks automatically and
+     turns on your HTTPS padlock for free.
+
+  ✅ Done when: your site loads at csraprecisionimaging.com
+     with a padlock in the browser.
+
+
+────────────────────────────────────────────────────────────────
+STEP 6 — How to update the site later
+────────────────────────────────────────────────────────────────
+
+Made a change? (Added a photo, fixed a typo, updated pricing)
+
+  1. Edit the file on your computer (same Notepad/TextEdit
+     method as above).
+
+  2. Go to  https://vercel.com/drop  again.
+
+  3. Drag the whole  csra-precision-imaging  folder in again.
+
+  4. Select your existing project name from the dropdown
+     (don't create a new one).
+
+  5. Click Deploy. Live in ~30 seconds.
+
+That's it — no Git, no command line, nothing complicated.
+
+
+────────────────────────────────────────────────────────────────
+COMING SOON — Add after your ITC thermography cert
+────────────────────────────────────────────────────────────────
+
+Once you pass the ITC sUAS Level 1 class, add this card
+to about.html in the cert-stack section:
+
+  <div class="cert-card">
+    <div class="cert-icon">🌡️</div>
+    <div class="ct">
+      <b>ITC sUAS Level 1 Thermographer</b>
+      Formally trained in thermographic principles for small
+      UAS applications — one of the few drone operators in
+      the CSRA with <span class="ch">ITC-certified
+      thermography training</span>.
     </div>
-    <div class="reveal">
-      <span class="eyebrow">Our Equipment</span>
-      <h2>One Platform.<br><em>Every Mission.</em></h2>
-      <p>The same enterprise-grade DJI Matrice 4TD flies every job — whether it's a commercial roof moisture assessment downtown or a midnight hog detection flight across 400 acres. Both sensors capture data in a single pass with no re-fly needed.</p>
-      <ul class="feat">
-        <li>Simultaneous RGB + radiometric thermal in one pass</li>
-        <li>Real temperature data embedded in every thermal pixel</li>
-        <li>FAA Part 107 certified pilot on every flight</li>
-        <li>$1M commercial liability insurance</li>
-      </ul>
-    </div>
   </div>
-</div></section>
-<div class="cta-band"><div class="inner">
-  <h2>Not Sure Which Service <em>You Need?</em></h2>
-  <p>Tell us what you're trying to accomplish and we'll point you in the right direction.</p>
-  <div class="row"><a class="btn btn-primary" href="contact.html">Get a Free Quote</a><a class="btn btn-ghost" href="about.html">About Us</a></div>
-</div></div>
-</main>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><a class="brand" href="index.html"><img src="images/logo.svg" alt="CSRA Precision Imaging logo" width="40" height="40"><span><span class="bt">CSRA <span>Precision</span> Imaging</span><span class="bs">LLC · Augusta, GA</span></span></a><p>FAA Part 107 certified thermal drone services across the CSRA.</p></div>
-    <div class="footer-col"><h4>Services</h4><ul><li><a href="services-commercial.html#construction">B2B / Commercial</a></li><li><a href="services-commercial.html#roof">Roof Moisture Assessments</a></li><li><a href="services-landowner.html">Wildlife Recovery</a></li><li><a href="services-landowner.html#nuisance">Nuisance Animal Detection</a></li></ul></div>
-    <div class="footer-col"><h4>Company</h4><ul><li><a href="pricing.html">Pricing</a></li>
-      <li><a href="about.html">About</a></li><li><a href="about.html#area">Service Area</a></li><li><a href="contact.html">Get a Quote</a></li></ul></div>
-    <div class="footer-col"><h4>Contact</h4><ul><li>Augusta, GA 30901</li><li>(706) 214-2772</li><li>info@csraprecisionimaging.com</li><li>Mon–Sat: By Appointment</li></ul></div>
-  </div>
-  <div class="footer-bottom"><p>© <span id="year">2025</span> CSRA Precision Imaging, LLC — Augusta, GA. All rights reserved. <a href="privacy.html" style="color:var(--muted);text-decoration:none">Privacy Policy</a> &nbsp;·&nbsp; Aerial imaging services are provided for informational and documentation purposes only. CSRA Precision Imaging, LLC is not a licensed land surveyor and does not perform land surveying as defined under applicable state law.</p></div>
-</footer>
-<script src="js/main.js"></script>
-</body>
-</html>
+
+And add this to the trust bar in all 5 HTML files:
+
+  <span><b>🌡️</b> ITC Certified Thermographer</span>
+
+Then redeploy (Step 6 above).
+
+================================================================
+  Questions? info@csraprecisionimaging.com
+  Site files: csra-precision-imaging folder on your computer
+================================================================

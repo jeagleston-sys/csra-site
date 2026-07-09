@@ -1,15 +1,114 @@
-{
-  "version": 2,
-  "builds": [
-    { "src": "**/*", "use": "@vercel/static" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Robots-Tag", "value": "index, follow" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
-      ]
-    }
-  ]
-}
+CSRA PRECISION IMAGING, LLC
+Thermal Drone Imaging Services — Augusta, Georgia (CSRA Region)
+Website: https://www.csraprecisionimaging.com
+Phone/Text: (706) 214-2772
+Email: info@csraprecisionimaging.com
+Hours: Monday–Saturday by appointment. After-hours night operations available.
+Response: Text is fastest — phone uses AI call screening. Texts reach us immediately.
+
+ABOUT
+CSRA Precision Imaging is a locally owned commercial drone company based in Augusta, GA.
+Credentials: FAA Part 107 Certified Remote Pilot | ITC Level I sUAS Certified Infrared Thermographer (Cert #251649668, expires 2031) | $1M Commercial General Liability Insurance | COI available on request.
+Equipment: DJI Matrice 4TD — simultaneous 48MP/4K RGB and 640x512 radiometric thermal imaging.
+Service Area: Augusta, GA and the Central Savannah River Area (CSRA) on both sides of the Georgia-South Carolina line. Travel beyond 30 miles: $1.50/mile.
+Not a licensed land surveyor.
+
+COMMERCIAL & B2B SERVICES
+
+1. Thermal Roof Moisture Assessment
+For roofing contractors and insurance adjusters. Radiometric thermal reveals moisture intrusion, heat loss, and hidden damage invisible to standard cameras. Interpreted by an ITC-certified thermographer.
+Standard rate: $595. Introductory rate (through Oct 31, 2026): $505. Covers up to 10,000 sq ft.
+Deliverables: PDF report with annotated findings + raw imagery, delivered within 24-48 hours. Georeferenced orthomosaic (.TIFF) available on request.
+
+2. Solar Panel Thermal Performance Mapping
+For solar operators and O&M teams. Identifies underperforming cells, hotspots, and bypass diode failures. RGB 2D orthomosaic + radiometric thermal in a single flight.
+Standard rate: $845. Introductory rate: $720. Covers up to 10,000 sq ft or 2 acres ground-mount.
+
+3. Insurance Documentation Package (Bundle)
+RGB 2D orthomosaic + full 3D model + radiometric thermal overlay. Everything an adjuster or underwriter needs in one flight.
+Standard rate: $1,345. Introductory rate: $1,145. Covers structures up to 10,000 sq ft.
+
+4. 3D Structural / Site Scan
+Photogrammetry model for construction and engineering clients. Accurate 3D models for planning and reporting.
+Standard rate: $760. Introductory rate: $645. Covers up to 10,000 sq ft footprint.
+
+5. Construction Progress Documentation
+Recurring scheduled overflights (weekly, biweekly, or monthly) producing timestamped orthomosaics and updated 3D models. Gives owners, lenders, and project managers a visual record from groundbreaking to completion. Custom quoted by site size and cadence.
+
+6. RGB 2D Orthomosaic — Commercial Site
+Construction/site documentation and property mapping.
+Standard rate: $510. Introductory rate: $435. Covers up to 5 acres.
+
+7. RGB 2D Orthomosaic — Residential
+Realtor listing package, single lot.
+Standard rate: $295. Introductory rate: $250. Covers up to 1 acre.
+
+8. Real Estate & Property Aerial Photography
+High-resolution aerial stills and georeferenced orthomosaic maps for MLS listings, pre-development due diligence, and site planning. Delivered within 24-48 hours formatted for immediate upload.
+
+LANDOWNER & RURAL SERVICES
+
+9. Post-Hunt Wildlife Recovery
+Thermal drone search for downed deer and game after a shot. Day or night operation through heavy brush. TEXT (706) 214-2772 for fastest response — every minute matters.
+Standard search fee: $270. Introductory search fee: $230. Plus $100 recovery bonus if the animal is located. Covers up to 50 acres.
+After-hours night dispatch: +$50. Rush same-day (under 4 hours notice): +$50.
+
+10. Feral Hog & Nuisance Animal Detection
+Thermal detection flight at dusk/night when hogs are most active. GPS-tagged animal counts, density mapping, and travel-corridor data. Useful for crop protection, hunting club management, and livestock safety.
+Standard rate: $340. Introductory rate: $290. Covers up to 100 acres, 2-hour flight.
+
+11. Wildlife Census & Herd Assessment
+Population count and habitat assessment using thermal aerial imaging. GPS-mapped herd locations and species distribution data.
+
+12. Property RGB Orthomosaic Survey
+Aerial map of rural property for fencing, timber, and land management planning.
+Standard rate: $425. Introductory rate: $360. Covers up to 50 acres.
+
+13. Combination Land Survey (Bundle)
+RGB + thermal in one flight — identifies drainage issues, wet areas, heat anomalies, and wildlife pressure.
+Standard rate: $630. Introductory rate: $535. Covers up to 50 acres.
+
+14. Crop Damage Documentation
+Aerial documentation for insurance claims on agricultural property.
+
+PRICING NOTES
+Standard rates are set 10% below the regional market average as a permanent competitive standard.
+Introductory rates are an additional 15% off standard rates through October 31, 2026, after which standard rates apply automatically.
+COI (Certificate of Insurance) available at no charge for commercial clients.
+Higher liability limits available for qualifying commercial projects upon request.
+Weather cancellations and reschedules: no charge.
+
+VOLUME DISCOUNTS (for repeat commercial clients)
+Bronze: 10% off for 3-5 jobs per season
+Silver: 15% off for 6-12 jobs per season
+Gold: 20% off for 13+ jobs per season or retainer accounts
+
+ADD-ONS & FEES
+Mileage beyond 30 miles from Augusta: $1.50/mile round trip
+After-hours night dispatch: +$50
+Rush/same-day booking (under 4 hrs notice): +$50
+Wildlife recovery bonus (paid only if animal located): +$100
+Georeferenced orthomosaic map (.TIFF): available on request
+COI (Certificate of Insurance): no charge
+
+FREQUENTLY ASKED QUESTIONS
+Q: How do I reach you for wildlife recovery?
+A: Text (706) 214-2772 immediately. Our phone uses AI call screening to filter 50+ daily robocalls — a text bypasses screening and reaches us directly. Don't wait on the contact form.
+
+Q: Are you insured and certified?
+A: Yes. FAA Part 107 Certified, ITC Level I sUAS Certified Infrared Thermographer, $1M commercial liability insurance. COI available on request.
+
+Q: Can you carry higher liability limits?
+A: Yes. Higher limits available for qualifying commercial projects upon request.
+
+Q: How fast is report delivery?
+A: Standard: PDF report and imagery within 24-48 hours. Priority turnaround available for volume clients.
+
+Q: Do you do periodic construction overflights?
+A: Yes — weekly, biweekly, or monthly. Custom quoted by site size and cadence.
+
+Q: What does thermal imaging show that a regular camera doesn't?
+A: Thermal detects surface-temperature differences invisible to RGB cameras. Wet roof substrate shows as cool anomalies; failing solar panels show as hotspots. Our radiometric sensor records actual temperature values in every pixel.
+
+Q: What is your service area?
+A: Augusta, GA and the CSRA (Central Savannah River Area) covering both the Georgia and South Carolina sides. Standard rates within 30 miles of Augusta. Travel beyond 30 miles: $1.50/mile round trip.
