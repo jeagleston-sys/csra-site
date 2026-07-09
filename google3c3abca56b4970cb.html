@@ -1,0 +1,205 @@
+================================================================
+  CSRA PRECISION IMAGING — LAUNCH CHECKLIST
+  Read this top to bottom. Do each step in order.
+  Estimated time: about 20 minutes.
+================================================================
+
+Before you start, make sure you have:
+  ✅ This folder (csra-precision-imaging) on your computer
+  ✅ A phone or email address handy for account sign-ups
+
+
+────────────────────────────────────────────────────────────────
+STEP 1 — Update your phone number (2 minutes)
+────────────────────────────────────────────────────────────────
+
+The site currently says [Your Phone Number] in a few places.
+Here's how to fix that:
+
+  1. Open the csra-precision-imaging folder on your computer.
+
+  2. Right-click the file called  index.html
+     → Choose "Open with" → Notepad (Windows) or TextEdit (Mac)
+
+  3. Press Ctrl+H (Windows) or Cmd+Option+F (Mac)
+     This opens Find & Replace.
+
+  4. In the "Find" box type:    [Your Phone Number]
+     In the "Replace" box type: your actual phone number
+     Click "Replace All"
+
+  5. Save the file (Ctrl+S or Cmd+S), then close it.
+
+  6. Repeat steps 2-5 for these files:
+       services.html
+       gallery.html
+       about.html
+       contact.html
+
+  ✅ Done when: all 5 files have your real phone number.
+
+
+────────────────────────────────────────────────────────────────
+STEP 2 — Set up your contact form (5 minutes)
+────────────────────────────────────────────────────────────────
+
+This makes the quote form on your Contact page actually send
+you an email when someone fills it out.
+
+  1. Go to:  https://formspree.io
+     Click "Get Started" and create a free account.
+     (Use your business email address.)
+
+  2. Once logged in, click "+ New Form"
+     Name it something like "CSRA Quote Form"
+     Click "Create Form"
+
+  3. You'll see a line that looks like this:
+       action="https://formspree.io/f/xpwzabcd"
+     The part after the last slash is your Form ID.
+     It's 8 characters — something like  xpwzabcd
+     Copy it.
+
+  4. Open  contact.html  in Notepad/TextEdit (same as Step 1).
+
+  5. Press Ctrl+H (Windows) or Cmd+Option+F (Mac)
+     In the "Find" box type:    YOUR_FORM_ID
+     In the "Replace" box type: your actual ID from step 3
+                                 (e.g.  xpwzabcd)
+     Click "Replace All"
+
+  6. Save and close contact.html.
+
+  7. Back in Formspree, go to Settings → Notifications
+     Make sure your email address is listed so you get
+     emailed every time someone submits the form.
+
+  ✅ Done when: YOUR_FORM_ID has been replaced with real letters.
+
+
+────────────────────────────────────────────────────────────────
+STEP 3 — Deploy to Vercel (5 minutes)
+────────────────────────────────────────────────────────────────
+
+  1. Go to:  https://vercel.com
+     Click "Sign Up" → sign up with your email.
+     (Free account — no credit card needed.)
+
+  2. In a NEW browser tab, go to:  https://vercel.com/drop
+
+  3. On your computer, find the csra-precision-imaging FOLDER
+     (not a file inside it — the whole folder).
+
+  4. Drag the entire  csra-precision-imaging  folder into
+     the browser window at vercel.com/drop.
+
+  5. It will ask you to pick a project name.
+     Type something like:  csra-precision-imaging
+     Click "Deploy"
+
+  6. Wait about 30 seconds. Vercel will show you a green
+     checkmark and a link like:
+       csra-precision-imaging.vercel.app
+
+  7. Click that link. Your site is live on the internet! 🎉
+
+  ✅ Done when: you can see your website at a .vercel.app address.
+
+
+────────────────────────────────────────────────────────────────
+STEP 4 — Test your contact form (2 minutes)
+────────────────────────────────────────────────────────────────
+
+  1. Go to your live site and click "Get a Quote"
+
+  2. Fill out the form with your own name and email, then
+     submit it.
+
+  3. Check your email inbox — you should receive a notification
+     from Formspree within a minute or two.
+
+  4. If it doesn't arrive, check your spam folder.
+     If it's still not working, double-check that you replaced
+     YOUR_FORM_ID correctly in Step 2.
+
+  ✅ Done when: you receive the test email.
+
+
+────────────────────────────────────────────────────────────────
+STEP 5 — Connect your real domain (optional, ~10 min)
+────────────────────────────────────────────────────────────────
+
+Right now your site is at something.vercel.app.
+To use csraprecisionimaging.com instead:
+
+  1. Buy your domain at Namecheap (namecheap.com) if you
+     haven't yet. Search for csraprecisionimaging.com
+     and check it out. (~$12/year)
+
+  2. In your Vercel dashboard, click your project →
+     "Settings" → "Domains" → "Add Domain"
+     Type: csraprecisionimaging.com → click Add
+
+  3. Vercel will show you two DNS records to add.
+     Copy them — you'll need them in the next step.
+
+  4. Log in to Namecheap → click "Manage" on your domain →
+     click "Advanced DNS" → paste in the records Vercel gave you.
+     (If you're stuck, Namecheap has live chat support.)
+
+  5. Wait 10-30 minutes. Vercel checks automatically and
+     turns on your HTTPS padlock for free.
+
+  ✅ Done when: your site loads at csraprecisionimaging.com
+     with a padlock in the browser.
+
+
+────────────────────────────────────────────────────────────────
+STEP 6 — How to update the site later
+────────────────────────────────────────────────────────────────
+
+Made a change? (Added a photo, fixed a typo, updated pricing)
+
+  1. Edit the file on your computer (same Notepad/TextEdit
+     method as above).
+
+  2. Go to  https://vercel.com/drop  again.
+
+  3. Drag the whole  csra-precision-imaging  folder in again.
+
+  4. Select your existing project name from the dropdown
+     (don't create a new one).
+
+  5. Click Deploy. Live in ~30 seconds.
+
+That's it — no Git, no command line, nothing complicated.
+
+
+────────────────────────────────────────────────────────────────
+COMING SOON — Add after your ITC thermography cert
+────────────────────────────────────────────────────────────────
+
+Once you pass the ITC sUAS Level 1 class, add this card
+to about.html in the cert-stack section:
+
+  <div class="cert-card">
+    <div class="cert-icon">🌡️</div>
+    <div class="ct">
+      <b>ITC sUAS Level 1 Thermographer</b>
+      Formally trained in thermographic principles for small
+      UAS applications — one of the few drone operators in
+      the CSRA with <span class="ch">ITC-certified
+      thermography training</span>.
+    </div>
+  </div>
+
+And add this to the trust bar in all 5 HTML files:
+
+  <span><b>🌡️</b> ITC Certified Thermographer</span>
+
+Then redeploy (Step 6 above).
+
+================================================================
+  Questions? info@csraprecisionimaging.com
+  Site files: csra-precision-imaging folder on your computer
+================================================================

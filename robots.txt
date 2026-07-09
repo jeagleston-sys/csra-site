@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | CSRA Precision Imaging</title>
+<meta name="description" content="Privacy policy for CSRA Precision Imaging, LLC. How we collect, use, and protect information submitted through our website.">
+<link rel="canonical" href="https://www.csraprecisionimaging.com/privacy.html">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+.prose h2{font-family:'Rajdhani',sans-serif;font-size:1.25rem;font-weight:700;letter-spacing:.03em;color:var(--white);margin:32px 0 10px}
+.prose h2:first-child{margin-top:0}
+.prose p{color:var(--smoke);line-height:1.78;margin-bottom:14px;font-size:.96rem}
+.prose ul{color:var(--smoke);line-height:1.78;margin-bottom:14px;padding-left:22px;font-size:.96rem}
+.prose ul li{margin-bottom:6px}
+.prose a{color:var(--amber);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose .updated{font-size:.82rem;color:var(--muted);margin-bottom:28px}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html"><img src="images/logo.svg" alt="CSRA Precision Imaging logo" width="40" height="40"><span><span class="bt">CSRA <span>Precision</span> Imaging</span><span class="bs">LLC</span></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-dropdown">
+      <a href="services.html" class="ddtoggle">Services</a>
+      <div class="nav-dropdown-menu">
+        <a href="services-commercial.html">🏢 Commercial &amp; B2B</a>
+        <div class="dm-divider"></div>
+        <a href="services-landowner.html">🦌 Landowner &amp; Outdoor</a>
+      </div>
+    </li>
+      
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a class="cta" href="contact.html">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+<main>
+<section class="section" style="padding-top:64px;padding-bottom:30px">
+  <div class="wrap reveal">
+    <span class="eyebrow">Legal</span>
+    <h1 style="margin-bottom:14px">Privacy <em>Policy</em></h1>
+  </div>
+</section>
+<div class="divider"></div>
+<section style="background:var(--navy)"><div class="section-inner">
+  <div style="max-width:760px" class="prose">
+    <p class="updated">Effective date: July 1, 2026 · CSRA Precision Imaging, LLC · Augusta, GA</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>When you submit a quote request through our contact form, we collect the information you voluntarily provide, which may include:</p>
+    <ul>
+      <li>Your name</li>
+      <li>Email address</li>
+      <li>Phone number</li>
+      <li>Property location or address</li>
+      <li>Service type requested</li>
+      <li>Project details you choose to share</li>
+    </ul>
+    <p>We do not collect payment information through our website. Payments are processed through third-party providers (Stripe, PayPal, or Zelle) subject to their own privacy policies.</p>
+
+    <h2>2. How We Use Your Information</h2>
+    <p>Information you submit is used solely to:</p>
+    <ul>
+      <li>Respond to your quote request or inquiry</li>
+      <li>Schedule and coordinate flight services</li>
+      <li>Communicate about your project</li>
+      <li>Send your deliverables (reports, imagery, data)</li>
+    </ul>
+    <p>We do not use your information for marketing to third parties, and we do not add you to mailing lists without your explicit consent.</p>
+
+    <h2>3. Information Sharing</h2>
+    <p>We do not sell, trade, rent, or otherwise transfer your personal information to outside parties. We may share information only in the following limited circumstances:</p>
+    <ul>
+      <li><strong>Service providers:</strong> Our contact form uses Formspree to route submissions to our inbox. Formspree's privacy policy governs how they handle form data.</li>
+      <li><strong>Legal requirements:</strong> We may disclose information if required by law or to protect our legal rights.</li>
+    </ul>
+
+    <h2>4. Analytics</h2>
+    <p>Our website uses Vercel Web Analytics to understand how visitors use the site. This service collects anonymous, aggregated data such as page views and general visitor counts. It does not use cookies and does not collect personally identifiable information. No individual user tracking occurs.</p>
+
+    <h2>5. Data Security</h2>
+    <p>We take reasonable precautions to protect the information you share with us. Quote request data is transmitted securely through Formspree's encrypted service and delivered to a secured business email account. We retain inquiry information only as long as necessary to complete your service engagement.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>You may request that we delete any personally identifiable information you have submitted to us by contacting us directly. We will honor deletion requests promptly.</p>
+
+    <h2>7. Children's Privacy</h2>
+    <p>Our services are not directed at individuals under 18 years of age. We do not knowingly collect information from minors.</p>
+
+    <h2>8. Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. The effective date at the top of this page will reflect any changes. Continued use of our website after changes are posted constitutes acceptance of the updated policy.</p>
+
+    <h2>9. Contact Us</h2>
+    <p>If you have questions about this privacy policy or how we handle your information, please contact us:</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="mailto:info@csraprecisionimaging.com">info@csraprecisionimaging.com</a></li>
+      <li><strong>Phone:</strong> (706) 214-2772</li>
+      <li><strong>Address:</strong> Augusta, GA 30901</li>
+    </ul>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><a class="brand" href="index.html"><img src="images/logo.svg" alt="CSRA Precision Imaging logo" width="40" height="40"><span><span class="bt">CSRA <span>Precision</span> Imaging</span><span class="bs">LLC · Augusta, GA</span></span></a><p>FAA Part 107 certified thermal drone services across the CSRA.</p></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services-commercial.html#construction">B2B / Commercial</a></li><li><a href="services-commercial.html#roof">Roof Moisture Assessments</a></li><li><a href="services-landowner.html">Wildlife Recovery</a></li><li><a href="services-landowner.html#nuisance">Nuisance Animal Detection</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li><li><a href="about.html#area">Service Area</a></li><li><a href="contact.html">Get a Quote</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li>Augusta, GA 30901</li><li>(706) 214-2772</li><li>info@csraprecisionimaging.com</li><li>Mon–Sat: By Appointment</li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© <span id="year">2025</span> CSRA Precision Imaging, LLC — Augusta, GA. All rights reserved. <a href="privacy.html" style="color:var(--muted);text-decoration:none">Privacy Policy</a> &nbsp;·&nbsp; Aerial imaging services are provided for informational and documentation purposes only. CSRA Precision Imaging, LLC is not a licensed land surveyor and does not perform land surveying as defined under applicable state law.</p></div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
