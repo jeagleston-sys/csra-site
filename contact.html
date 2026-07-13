@@ -33,7 +33,7 @@
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="https://clienthub.getjobber.com/client_hubs/8a719245-ba09-4e6e-a5ce-ac67261b056c/login/new?source=share_login" target="_blank" rel="noopener" style="font-size:.78rem;opacity:.75;letter-spacing:.06em">Client Login</a></li>
-      <li><a class="cta" href="contact.html" aria-current="page">Get a Quote</a></li>
+      <li><a class="cta" href="contact.html" aria-current="page">Book a Flight</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </nav>
@@ -73,11 +73,26 @@
         <label for="service">Service Needed <span class="req">*</span></label>
         <select id="service" name="service" required>
           <option value="">Select a service…</option>
-          <option>Thermal Roof Moisture Assessment</option>
-          <option>Post-Hunt Wildlife Recovery</option>
-          <option>Farm Nuisance Animal Detection</option>
-          <option>B2B / Commercial Drone Work</option>
-          <option>3D Modeling / Mapping</option>
+          <optgroup label="Commercial &amp; B2B">
+            <option>Thermal Roof Moisture Assessment</option>
+            <option>Solar Panel Thermal Survey</option>
+            <option>Insurance Documentation Package (RGB + 3D + Thermal)</option>
+            <option>3D Structural / Site Scan</option>
+            <option>Construction Progress Documentation</option>
+            <option>RGB Orthomosaic — Commercial Site</option>
+          </optgroup>
+          <optgroup label="Real Estate Photography">
+            <option>Real Estate — Standard Listing (Stills)</option>
+            <option>Real Estate — Premium Listing (Stills + Video)</option>
+            <option>Real Estate — Commercial Property</option>
+          </optgroup>
+          <optgroup label="Landowner &amp; Rural">
+            <option>Post-Hunt Wildlife Recovery</option>
+            <option>Feral Hog / Nuisance Animal Detection</option>
+            <option>Wildlife Census / Herd Assessment</option>
+            <option>Combination Land Survey (RGB + Thermal)</option>
+            <option>Property RGB Orthomosaic Survey</option>
+          </optgroup>
           <option>Other / Not Sure</option>
         </select>
       </div>
@@ -89,7 +104,7 @@
         <label for="message">Project Details</label>
         <textarea id="message" name="message" placeholder="Roof size, acreage, timing, or anything else we should know…"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Request My Quote</button>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send My Request</button>
       <p class="form-note">By submitting, you agree to be contacted about your request. We never share your information.</p>
     </form>
 
@@ -99,6 +114,7 @@
       <div class="contact-item"><div class="cic" style="font-size:.8rem;font-weight:700;color:var(--muted)">LOC</div><div class="ct"><b>Service Area</b>Augusta, GA &amp; the greater CSRA (GA &amp; SC)</div></div>
       <div class="contact-item"><div class="cic" style="font-size:.8rem;font-weight:700;color:var(--muted)">TEL</div><div class="ct"><b>Call or Text</b>(706) 214-2772<br><small style="color:var(--muted)">Phone uses AI screening to block robocalls — text for fastest response</small></div></div>
       <div class="contact-item"><div class="cic">✉️</div><div class="ct"><b>Email</b>info@csraprecisionimaging.com</div></div>
+      <div class="contact-item"><div class="cic" style="font-size:.8rem;font-weight:700;color:var(--muted)">LI</div><div class="ct"><b>LinkedIn</b><a href="https://www.linkedin.com/in/justineagleston-csradrone" target="_blank" rel="noopener" style="color:var(--amber)">Connect with us on LinkedIn →</a></div></div>
       <div class="contact-item"><div class="cic">🕐</div><div class="ct"><b>Hours</b>Mon–Sat: By Appointment · Wildlife recovery 24/7</div></div>
       <div class="contact-item"><div class="cic" style="font-size:.8rem;font-weight:700;color:var(--muted)">FAA</div><div class="ct"><b>Credentials</b>FAA Part 107 Certified · ITC Level I sUAS Certified Infrared Thermographer · $1M Commercial Liability Insurance</div></div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-top:8px">
@@ -108,12 +124,35 @@
     </div>
   </div>
 </section>
+
+<section style="background:var(--navy-mid);padding:40px 0">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:20px">
+      <div class="section-label">Service Area</div>
+      <h2>Serving Augusta &amp; the <em>CSRA</em></h2>
+    </div>
+    <p style="color:var(--smoke);font-size:.92rem;margin-bottom:20px">Standard rates apply within approximately 30 miles of Augusta, GA. Travel beyond 30 miles: +$1.50/mile round trip. We regularly serve clients on both sides of the Georgia–South Carolina line.</p>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);height:340px">
+      <iframe
+        title="CSRA Precision Imaging Service Area — Augusta GA"
+        width="100%" height="340" style="border:0;display:block"
+        loading="lazy" allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d197000!2d-82.02!3d33.47!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f9d63857e3a989%3A0xaee28df9cf26a8ef!2sAugusta%2C+GA!5e0!3m2!1sen!2sus!4v1" >
+      </iframe>
+    </div>
+    <p style="font-size:.76rem;color:var(--muted);margin-top:10px;text-align:center">Map shows the Augusta, GA area — approximate service area extends ~30 miles in all directions.</p>
+  </div>
+</section>
+
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand"><a class="brand" href="index.html"><img src="images/logo.svg" alt="CSRA Precision Imaging logo" width="40" height="40"><span><span class="bt">CSRA <span>Precision</span> Imaging</span><span class="bs">LLC · Augusta, GA</span></span></a><p>FAA Part 107 certified thermal drone services across the CSRA.</p></div>
-    <div class="footer-col"><h4>Services</h4><ul><li><a href="services-commercial.html#construction">B2B / Commercial</a></li><li><a href="services-commercial.html#roof">Roof Moisture Assessments</a></li><li><a href="services-landowner.html">Wildlife Recovery</a></li><li><a href="services-landowner.html#nuisance">Nuisance Animal Detection</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services-commercial.html#construction">B2B / Commercial</a></li><li><a href="services-commercial.html#roof">Roof Moisture Assessments</a></li>
+        <li><a href="services-commercial.html#realestate">Real Estate Photography</a></li><li><a href="services-landowner.html">Wildlife Recovery</a></li><li><a href="services-landowner.html#nuisance">Nuisance Animal Detection</a></li>
+        <li><a href="feral-hog-detection.html">Feral Hog Drone Scouting</a></li></ul></div>
     <div class="footer-col"><h4>Company</h4><ul><li><a href="pricing.html">Pricing</a></li>
       <li><a href="about.html">About</a></li><li><a href="about.html#area">Service Area</a></li><li><a href="contact.html">Get a Quote</a></li></ul></div>
     <div class="footer-col"><h4>Contact</h4><ul><li>Augusta, GA 30901</li><li>(706) 214-2772</li><li>info@csraprecisionimaging.com</li><li>Mon–Sat: By Appointment</li></ul></div>
@@ -122,5 +161,25 @@
 </footer>
 
 <script src="js/main.js"></script>
+
+<script>
+// Pre-fill service from URL parameter e.g. contact.html?service=HogDetection
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var svc = params.get('service');
+  if (svc) {
+    var sel = document.getElementById('service');
+    if (sel) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value.replace(/\s/g,'').toLowerCase() === svc.replace(/\s/g,'').toLowerCase() ||
+            sel.options[i].text.replace(/\s/g,'').toLowerCase().indexOf(svc.toLowerCase()) > -1) {
+          sel.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+})();
+</script>
 </body>
 </html>

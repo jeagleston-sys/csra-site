@@ -97,6 +97,28 @@
     });
   }
 
+
+  /* ---- Mobile: Services dropdown toggle ---- */
+  var dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach(function(dd) {
+    var toggle = dd.querySelector('.ddtoggle');
+    var menu = dd.querySelector('.nav-dropdown-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', function(e) {
+        // On mobile (small screen or hamburger open), toggle dropdown
+        if (window.innerWidth < 768 || (links && links.classList.contains('open'))) {
+          e.preventDefault();
+          var isOpen = menu.style.opacity === '1';
+          menu.style.opacity = isOpen ? '0' : '1';
+          menu.style.pointerEvents = isOpen ? 'none' : 'all';
+          menu.style.transform = isOpen ? 'translateY(6px)' : 'translateY(0)';
+          menu.style.position = 'relative';
+          menu.style.top = 'auto';
+        }
+      });
+    }
+  });
+
   /* ---- Footer year ---- */
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
