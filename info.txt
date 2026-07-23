@@ -10,11 +10,14 @@ Response: Text is fastest — phone uses AI call screening. Texts reach us immed
 ABOUT
 CSRA Precision Imaging is a locally owned commercial drone company based in Augusta, GA.
 Credentials: FAA Part 107 Certified Remote Pilot | ITC Level I sUAS Certified Infrared Thermographer (Cert #251649668, expires 2031) | $1M Commercial General Liability Insurance | COI available on request.
-Equipment: DJI Matrice 4TD — simultaneous 48MP/4K RGB and 640x512 radiometric thermal imaging.
+Equipment: DJI Matrice 4TD — triple-lens RGB (4K video), 640×512 radiometric thermal, NIR auxiliary light, laser rangefinder.
 Service Area: Augusta, GA and the Central Savannah River Area (CSRA) on both sides of the Georgia-South Carolina line. Travel beyond 30 miles: $1.50/mile.
 Not a licensed land surveyor.
 
 COMMERCIAL & B2B SERVICES
+
+1a. Basic Visual Roof Inspection (RGB only, no thermal)
+Entry-level aerial roof documentation without thermal. Standard $340. Introductory $295. Up to 10,000 sq ft. Great for roofing contractors new to drone data — upgrade to full thermal assessment later.
 
 1. Thermal Roof Moisture Assessment
 For roofing contractors and insurance adjusters. Radiometric thermal reveals moisture intrusion, heat loss, and hidden damage invisible to standard cameras. Interpreted by an ITC-certified thermographer.
