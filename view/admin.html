@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Project Admin | CSRA Precision Imaging</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Montserrat:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#252f3d; --navy-deep:#1c2430; --navy-mid:#3a5068;
+  --amber:#f4a023; --white:#f4f6f8; --muted:#a9bccf;
+  --hairline:rgba(200,220,240,.16); --border:rgba(244,160,35,.45);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{font-family:'Lato',sans-serif;background:var(--navy-deep);color:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:640px;margin:0 auto;padding:48px 20px 80px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:36px}
+.brand img{width:36px;height:36px}
+.brand span{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:1.3rem;letter-spacing:.05em}
+.brand span b{color:var(--amber);font-weight:400}
+h1{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:2.1rem;letter-spacing:.03em;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:32px;font-size:.94rem}
+
+/* lock form */
+.lock{background:var(--navy);border:1px solid var(--hairline);border-radius:10px;padding:28px;display:grid;gap:14px}
+.lock label{font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.lock input{width:100%;padding:12px 14px;border-radius:5px;border:1px solid rgba(216,224,232,.3);background:var(--navy-deep);color:var(--white);font-size:1rem}
+.lock input:focus{outline:none;border-color:var(--amber)}
+.lock .err{color:#ff9b8a;font-size:.88rem;min-height:1.2em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:5px;width:100%;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--amber);color:var(--navy);border:none;cursor:pointer;transition:filter .2s}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.6;cursor:default}
+
+/* project list */
+.proj{display:block;background:var(--navy);border:1px solid var(--hairline);border-radius:10px;padding:18px 20px;margin-bottom:12px;
+  text-decoration:none;transition:border-color .2s}
+.proj:hover{border-color:var(--border)}
+.proj .t{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:1.3rem;letter-spacing:.03em;color:var(--white)}
+.proj .meta{color:var(--muted);font-size:.86rem;margin-top:4px}
+.proj .go{float:right;color:var(--amber);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.empty{color:var(--muted);font-size:.92rem}
+.signout{margin-top:24px;font-size:.82rem;color:var(--muted)}
+.signout button{background:none;border:none;color:var(--amber);text-decoration:underline;cursor:pointer;font:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="/index.html"><img src="/images/logo.svg" alt="CSRA Precision Imaging logo"><span>CSRA <b>Precision Imaging</b></span></a>
+  <h1>Project Admin</h1>
+  <p class="sub">All active client project maps, in one place.</p>
+
+  <form class="lock" id="unlockForm" autocomplete="off">
+    <div>
+      <label for="code">Admin Code</label>
+      <input type="text" id="code" name="code" placeholder="Enter admin code" autocomplete="off" spellcheck="false">
+    </div>
+    <button type="submit" class="btn" id="unlockBtn">Unlock</button>
+    <div class="err" id="unlockErr" aria-live="polite"></div>
+  </form>
+
+  <div id="list" hidden></div>
+  <div class="signout" id="signoutRow" hidden><button id="signoutBtn" type="button">Sign out of this device</button></div>
+</div>
+
+<script>
+(function () {
+  var listEl = document.getElementById('list');
+  var formEl = document.getElementById('unlockForm');
+  var errEl = document.getElementById('unlockErr');
+  var btnEl = document.getElementById('unlockBtn');
+  var signoutRow = document.getElementById('signoutRow');
+
+  function renderProjects(data) {
+    var projects = (data && data.projects) || [];
+    if (!projects.length) {
+      listEl.innerHTML = '<p class="empty">No active projects yet.</p>';
+    } else {
+      listEl.innerHTML = projects.map(function (p) {
+        var meta = [];
+        if (p.client) meta.push(p.client);
+        if (p.processed) meta.push('Processed ' + p.processed);
+        if (p.note) meta.push(p.note);
+        return '<a class="proj" href="/view/?job=' + encodeURIComponent(p.slug) + '">' +
+          '<span class="go">Open →</span>' +
+          '<div class="t">' + (p.title || p.slug) + '</div>' +
+          '<div class="meta">' + meta.join(' · ') + '</div>' +
+          '</a>';
+      }).join('');
+    }
+    listEl.hidden = false;
+    formEl.hidden = true;
+    signoutRow.hidden = false;
+  }
+
+  function tryLoad() {
+    return fetch('/view/admin-index/projects.json', { cache: 'no-store', credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.ok) return r.json().then(renderProjects);
+        if (r.status === 401) { formEl.hidden = false; listEl.hidden = true; signoutRow.hidden = true; return; }
+        throw new Error('load-failed');
+      })
+      .catch(function () {
+        errEl.textContent = 'Connection problem. Please try again.';
+      });
+  }
+
+  formEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var code = document.getElementById('code').value.trim();
+    btnEl.disabled = true; btnEl.textContent = 'Checking…'; errEl.textContent = '';
+    fetch('/view/_auth', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ job: 'admin-index', code: code })
+    }).then(function (r) {
+      if (r.ok) return tryLoad();
+      errEl.textContent = r.status === 401 ? 'Incorrect code.' : 'Connection problem. Please try again.';
+    }).catch(function () {
+      errEl.textContent = 'Connection problem. Please try again.';
+    }).finally(function () {
+      btnEl.disabled = false; btnEl.textContent = 'Unlock';
+    });
+  });
+
+  document.getElementById('signoutBtn').addEventListener('click', function () {
+    fetch('/view/_logout', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ job: 'admin-index' })
+    }).then(function () { location.reload(); });
+  });
+
+  tryLoad();
+})();
+</script>
+</body>
+</html>

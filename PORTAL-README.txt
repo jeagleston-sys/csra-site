@@ -31,8 +31,24 @@ Adding a new project
    map/report/map_report.json -> "gps corner"), optional download link.
 4. Vercel: add "<folder>":"<new code>" to PORTAL_CODES, then save.
    Codes: 12 letters/numbers; dashes, spaces and case are ignored.
-5. Commit + push. Put the link in the Jobber job; send the code to the client
-   separately (text is best).
+5. Add an entry to view/admin-index/projects.json (title, slug, client,
+   processed date, optional note) so it shows up on the admin page.
+6. Commit + push. Put the link in the Jobber job; send the code to the
+   client separately (text is best).
+
+Admin index (your own bookmark, not for clients)
+-------------------------------------------------
+- Page: https://www.csraprecisionimaging.com/view/admin.html
+- Lists every project in view/admin-index/projects.json as a clickable
+  link straight to /view/?job=<slug> — no more digging through Vercel or
+  remembering job-folder slugs.
+- Protected by its own code, same mechanism as any client project: add
+  "admin-index":"<code you pick>" to PORTAL_CODES in Vercel. Pick something
+  you'll actually remember — this one's just for you, not auto-generated.
+- projects.json itself lives inside the locked view/admin-index/ folder,
+  so the project list is exactly as protected as any client's job.json —
+  admin.html is the only public HTML file involved, and it holds no data.
+- Remembers your device for 90 days, same as client logins.
 
 Thermal images (optional)
 -------------------------

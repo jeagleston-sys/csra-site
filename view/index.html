@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Project Map Viewer | CSRA Precision Imaging</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Montserrat:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/view/lib/leaflet.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+/* ============================================================
+   CSRA PRECISION IMAGING — client map viewer
+   One page serves every job: /view/?job=<job-folder-name>
+   Each job lives in /view/<job-folder-name>/ with a job.json
+   ============================================================ */
+:root{
+  --navy:#252f3d; --navy-deep:#1c2430; --navy-mid:#3a5068; --steel:#4a6278;
+  --amber:#f4a023; --amber-light:#f9b84a;
+  --smoke:#d8e0e8; --white:#f4f6f8; --muted:#a9bccf;
+  --hairline:rgba(200,220,240,.16); --border:rgba(244,160,35,.45);
+  --panel-w:340px; --bar-h:60px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{font-family:'Lato',sans-serif;background:var(--navy-deep);color:var(--white);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
+
+/* ---------- Top bar ---------- */
+.bar{position:fixed;inset:0 0 auto 0;height:var(--bar-h);z-index:1000;display:flex;align-items:center;gap:14px;padding:0 16px;
+  background:rgba(28,36,48,.97);border-bottom:1px solid var(--border);border-left:4px solid var(--amber)}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand img{width:34px;height:34px}
+.brand .bt{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:1.2rem;letter-spacing:.06em;line-height:1;white-space:nowrap}
+.brand .bt span{color:var(--amber)}
+.bar .sep{width:1px;height:28px;background:var(--hairline);flex-shrink:0}
+.bar .job{min-width:0;flex:1}
+.bar .job .k{font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.bar .job .t{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.08rem;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .contact{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:8px 14px;border:1px solid rgba(216,224,232,.3);border-radius:5px;white-space:nowrap;transition:border-color .2s,color .2s}
+.bar .contact:hover{border-color:var(--amber);color:var(--amber)}
+.panel-toggle{display:none}
+
+/* ---------- Layout ---------- */
+#map{position:fixed;top:var(--bar-h);right:0;bottom:0;left:var(--panel-w);background:#161d27}
+.panel{position:fixed;top:var(--bar-h);left:0;bottom:0;width:var(--panel-w);z-index:900;overflow-y:auto;
+  background:var(--navy);border-right:1px solid var(--hairline);padding:20px 20px 28px}
+.panel::-webkit-scrollbar{width:8px}.panel::-webkit-scrollbar-thumb{background:var(--steel);border-radius:4px}
+.sec{padding:18px 0;border-top:1px solid var(--hairline)}
+.sec:first-child{border-top:none;padding-top:0}
+.sec h2{font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);
+  display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec h2::before{content:'';width:18px;height:2px;background:var(--amber)}
+.title{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:2rem;letter-spacing:.04em;line-height:1.05}
+.sub{color:var(--smoke);margin-top:4px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-top:14px;font-size:.9rem}
+.facts dt{color:var(--muted)}
+.facts dd{color:var(--white);text-align:right;font-variant-numeric:tabular-nums}
+.note{color:var(--smoke);font-size:.88rem;margin-top:12px}
+
+/* segmented + buttons */
+.seg{display:flex;background:var(--navy-deep);border:1px solid var(--hairline);border-radius:6px;padding:3px;gap:3px}
+.seg button{flex:1;padding:7px 6px;border-radius:4px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;color:var(--smoke)}
+.seg button:hover{color:var(--white)}
+.seg button[aria-pressed="true"]{background:var(--amber);color:var(--navy)}
+.layer{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--hairline);border-radius:6px;margin-bottom:6px;cursor:pointer}
+.layer:hover{border-color:rgba(244,160,35,.5)}
+.layer input{accent-color:var(--amber);width:16px;height:16px}
+.layer span{font-weight:700}
+.range{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:.85rem;color:var(--muted)}
+.range input{flex:1;accent-color:var(--amber)}
+.range output{width:38px;text-align:right;color:var(--white);font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:5px;width:100%;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
+.btn-primary{background:var(--amber);color:var(--navy)}
+.btn-primary:hover{background:var(--amber-light)}
+.btn-ghost{border:1px solid rgba(216,224,232,.3)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.stack{display:grid;gap:8px}
+.readout{margin-top:12px;background:var(--navy-deep);border:1px solid var(--hairline);border-radius:6px;padding:12px 14px;min-height:64px}
+.readout .big{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.readout .small{color:var(--muted);font-size:.84rem;margin-top:2px}
+.hint{color:var(--muted);font-size:.82rem;margin-top:8px}
+.fine{color:var(--muted);font-size:.76rem;line-height:1.5}
+.fine a{color:var(--amber)}
+
+/* map overlays */
+.leaflet-container{font-family:'Lato',sans-serif;background:#161d27}
+.leaflet-control-attribution{background:rgba(28,36,48,.8)!important;color:var(--muted)!important;font-size:10px}
+.leaflet-control-attribution a{color:var(--smoke)!important}
+.leaflet-bar a{background:var(--navy)!important;color:var(--white)!important;border-bottom-color:var(--hairline)!important}
+.leaflet-bar a:hover{background:var(--navy-mid)!important}
+.leaflet-bar{border:1px solid var(--hairline)!important;box-shadow:0 4px 14px rgba(0,0,0,.35)!important}
+.leaflet-control-scale-line{background:rgba(28,36,48,.8);color:var(--smoke);border-color:var(--smoke)}
+.fit-btn{font-size:16px;line-height:30px!important}
+.m-tip{background:var(--navy);color:var(--white);border:1px solid var(--amber);border-radius:4px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;padding:2px 7px;box-shadow:none}
+.m-tip::before{display:none}
+.measuring .leaflet-container{cursor:crosshair}
+
+/* thermal findings */
+.thumbs{display:grid;gap:10px}
+.thumb{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center;text-align:left;padding:6px;border:1px solid var(--hairline);border-radius:6px;transition:border-color .2s}
+.thumb:hover,.thumb:focus-visible{border-color:var(--amber);outline:none}
+.thumb img{width:84px;height:63px;object-fit:cover;border-radius:4px;background:var(--navy-deep)}
+.thumb .n{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--amber);font-size:.8rem;letter-spacing:.08em}
+.thumb .c{font-size:.86rem;color:var(--smoke);line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.check{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--smoke);margin-bottom:12px;cursor:pointer}
+.check input{accent-color:var(--amber);width:16px;height:16px}
+.pin{width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#e5484d;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5);display:grid;place-items:center}
+.pin span{transform:rotate(45deg);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;color:#fff}
+.pin.active{background:var(--amber)}.pin.active span{color:var(--navy)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:2000;background:rgba(10,14,20,.94);display:grid;grid-template-rows:auto 1fr auto;padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.lb-top{display:flex;align-items:center;gap:12px;color:var(--smoke);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.lb-top .sp{flex:1}
+.lb-btn{padding:8px 14px;border:1px solid rgba(216,224,232,.3);border-radius:5px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.9rem}
+.lb-btn:hover{border-color:var(--amber);color:var(--amber)}
+.lb-stage{position:relative;display:grid;place-items:center;min-height:0;padding:10px 0}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;border-radius:6px;background:rgba(28,36,48,.8);font-size:1.8rem;color:var(--white)}
+.lb-nav:hover{color:var(--amber)}
+.lb-prev{left:0}.lb-next{right:0}
+.lb-cap{max-width:900px;margin:0 auto;color:var(--smoke);text-align:center;font-size:.95rem}
+
+/* status */
+.status{position:fixed;inset:var(--bar-h) 0 0 var(--panel-w);display:grid;place-items:center;z-index:800;text-align:center;padding:24px}
+.status[hidden]{display:none}
+.status .card{max-width:420px;background:var(--navy);border:1px solid var(--hairline);border-radius:8px;padding:28px}
+.status h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.04em;margin-bottom:8px}
+.status p{color:var(--smoke)}
+.status a{color:var(--amber)}
+.unlock{margin-top:18px;display:grid;gap:10px;text-align:left}
+.unlock label{font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.unlock input{width:100%;padding:12px 14px;border-radius:5px;border:1px solid rgba(216,224,232,.3);background:var(--navy-deep);color:var(--white);
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase}
+.unlock input:focus{outline:none;border-color:var(--amber)}
+.unlock .err{color:#ff9b8a;font-size:.88rem;min-height:1.2em}
+.linkbtn{color:var(--amber);text-decoration:underline;font-size:inherit}
+
+/* locked / not found: hide tools until the project is open */
+body.locked .panel,body.locked .panel-toggle{display:none}
+body.locked #map,body.locked .status{left:0}
+
+/* ---------- Mobile: panel becomes a bottom sheet ---------- */
+@media (max-width:820px){
+  :root{--bar-h:56px}
+  .brand .bt,.bar .sep{display:none}
+  .bar .contact{display:none}
+  .panel-toggle{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:5px;background:var(--amber);color:var(--navy);
+    font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase}
+  #map,.status{left:0}
+  .panel{top:auto;left:0;right:0;width:auto;max-height:62vh;border-right:none;border-top:2px solid var(--amber);border-radius:12px 12px 0 0;
+    transform:translateY(100%);transition:transform .25s ease;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+  body.panel-open .panel{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="/" title="CSRA Precision Imaging home"><img src="/images/logo.svg" alt="CSRA Precision Imaging logo" width="34" height="34"><span class="bt">CSRA <span>Precision</span> Imaging</span></a>
+  <div class="sep" aria-hidden="true"></div>
+  <div class="job"><div class="k">Project Map</div><div class="t" id="barTitle">Loading…</div></div>
+  <a class="contact" href="mailto:info@csraprecisionimaging.com">Questions? Contact Us</a>
+  <button class="panel-toggle" id="panelToggle" aria-expanded="false" aria-controls="panel">Details &amp; Tools</button>
+</header>
+
+<aside class="panel" id="panel" aria-label="Project details and tools">
+  <section class="sec">
+    <div class="title" id="jobTitle"></div>
+    <p class="sub" id="jobSub"></p>
+    <dl class="facts" id="jobFacts"></dl>
+    <p class="note" id="jobNote" hidden></p>
+  </section>
+
+  <section class="sec" id="thermSec" hidden>
+    <h2>Thermal Findings</h2>
+    <label class="check" id="pinToggleRow"><input type="checkbox" id="pinToggle" checked> Show locations on map</label>
+    <div class="thumbs" id="thermList"></div>
+  </section>
+
+  <section class="sec" id="layerSec">
+    <h2>Imagery</h2>
+    <div id="layerList"></div>
+    <label class="range">Opacity <input type="range" id="opacity" min="0" max="100" value="100"><output id="opacityOut">100%</output></label>
+  </section>
+
+  <section class="sec">
+    <h2>Background Map</h2>
+    <div class="seg" role="group" aria-label="Background map">
+      <button type="button" data-base="satellite" aria-pressed="true">Satellite</button>
+      <button type="button" data-base="street" aria-pressed="false">Street</button>
+      <button type="button" data-base="none" aria-pressed="false">None</button>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Measure</h2>
+    <div class="seg" role="group" aria-label="Measure tool">
+      <button type="button" data-measure="distance" aria-pressed="false">Distance</button>
+      <button type="button" data-measure="area" aria-pressed="false">Area</button>
+      <button type="button" data-measure="clear" aria-pressed="false">Clear</button>
+    </div>
+    <div class="readout" aria-live="polite">
+      <div class="big" id="mBig">—</div>
+      <div class="small" id="mSmall">Choose Distance or Area, then tap points on the map.</div>
+    </div>
+    <p class="hint" id="mHint" hidden>Double-click (or tap Finish) to end. Press Esc to cancel.</p>
+    <button type="button" class="btn btn-ghost" id="mFinish" style="margin-top:8px" hidden>Finish</button>
+  </section>
+
+  <section class="sec" id="dlSec" hidden>
+    <h2>Downloads</h2>
+    <div class="stack" id="dlList"></div>
+  </section>
+
+  <section class="sec">
+    <p class="fine">Measurements are approximate and intended for inspection, planning and documentation. They are not a land survey. CSRA Precision Imaging, LLC is not a licensed land surveyor.</p>
+    <p class="fine" style="margin-top:10px">Questions about this project? <a href="mailto:info@csraprecisionimaging.com">info@csraprecisionimaging.com</a> · Text <a href="sms:+17062142772">(706) 214-2772</a></p>
+    <p class="fine" style="margin-top:10px">On a shared computer? <button type="button" class="linkbtn" id="signOut">Sign out of this project</button></p>
+  </section>
+</aside>
+
+<div id="map" role="application" aria-label="Project map"></div>
+
+<div class="status" id="status" hidden>
+  <div class="card">
+    <h1 id="statusTitle">Project not found</h1>
+    <p id="statusText">Please use the link from your project email or client hub. If it still doesn't open, contact us at <a href="mailto:info@csraprecisionimaging.com">info@csraprecisionimaging.com</a>.</p>
+    <form class="unlock" id="unlockForm" hidden autocomplete="off">
+      <label for="code">Project access code</label>
+      <input id="code" name="code" type="text" inputmode="text" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" required>
+      <button type="submit" class="btn btn-primary" id="unlockBtn">View Project</button>
+      <div class="err" id="unlockErr" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Thermal image viewer">
+  <div class="lb-top"><span id="lbCount"></span><span class="sp"></span>
+    <button type="button" class="lb-btn" id="lbMap">Show on map</button>
+    <button type="button" class="lb-btn" id="lbClose" aria-label="Close">Close ✕</button>
+  </div>
+  <div class="lb-stage">
+    <img id="lbImg" alt="">
+    <button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+    <button type="button" class="lb-nav lb-next" id="lbNext" aria-label="Next image">›</button>
+  </div>
+  <p class="lb-cap" id="lbCap"></p>
+</div>
+
+<script src="/view/lib/leaflet.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- helpers ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var FT_PER_M = 3.280839895, SQFT_PER_M2 = 10.76391042, M2_PER_ACRE = 4046.8564224;
+
+  function fmt(n, d) { return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function fmtLength(m) {
+    var ft = m * FT_PER_M;
+    return { big: ft < 1000 ? fmt(ft, 1) + ' ft' : fmt(ft / 5280, 2) + ' mi',
+             small: m < 1000 ? fmt(m, 2) + ' m' : fmt(m / 1000, 3) + ' km' };
+  }
+  function fmtArea(m2) {
+    var sqft = m2 * SQFT_PER_M2;
+    return { big: fmt(sqft, 0) + ' sq ft',
+             small: fmt(m2 / M2_PER_ACRE, 3) + ' acres · ' + fmt(m2, 1) + ' m²' };
+  }
+  // Geodesic polygon area on the WGS84 sphere (same method Leaflet.draw uses)
+  function geodesicArea(latlngs) {
+    var R = 6378137, d2r = Math.PI / 180, area = 0, n = latlngs.length;
+    if (n < 3) return 0;
+    for (var i = 0; i < n; i++) {
+      var p1 = latlngs[i], p2 = latlngs[(i + 1) % n];
+      area += (p2.lng - p1.lng) * d2r * (2 + Math.sin(p1.lat * d2r) + Math.sin(p2.lat * d2r));
+    }
+    return Math.abs(area * R * R / 2);
+  }
+  function pathLength(latlngs) {
+    var t = 0;
+    for (var i = 1; i < latlngs.length; i++) t += latlngs[i - 1].distanceTo(latlngs[i]);
+    return t;
+  }
+  function showStatus(title, html) {
+    $('status').hidden = false;
+    document.body.classList.add('locked');
+    if (title) $('statusTitle').textContent = title;
+    if (html) $('statusText').innerHTML = html;
+    $('barTitle').textContent = '—';
+  }
+
+  /* ---------- map + basemaps ---------- */
+  var map = L.map('map', { zoomControl: true, maxZoom: 26, zoomSnap: 0.5, attributionControl: true });
+  map.attributionControl.setPrefix(false);
+  L.control.scale({ imperial: true, metric: true, position: 'bottomright' }).addTo(map);
+  map.setView([33.47, -81.975], 14); // Augusta, until the job loads
+
+  var basemaps = {
+    satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxNativeZoom: 19, maxZoom: 26, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics'
+    }),
+    street: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxNativeZoom: 19, maxZoom: 26, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }),
+    none: null
+  };
+  var activeBase = basemaps.satellite.addTo(map);
+  document.querySelectorAll('[data-base]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (activeBase) map.removeLayer(activeBase);
+      activeBase = basemaps[b.dataset.base];
+      if (activeBase) activeBase.addTo(map).bringToBack();
+      document.querySelectorAll('[data-base]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    });
+  });
+
+  /* ---------- fit-to-project control ---------- */
+  var jobBounds = null;
+  var FitControl = L.Control.extend({
+    options: { position: 'topleft' },
+    onAdd: function () {
+      var c = L.DomUtil.create('div', 'leaflet-bar');
+      var a = L.DomUtil.create('a', 'fit-btn', c);
+      a.href = '#'; a.title = 'Zoom to project'; a.setAttribute('role', 'button'); a.setAttribute('aria-label', 'Zoom to project');
+      a.innerHTML = '&#x2922;';
+      L.DomEvent.on(a, 'click', function (e) { L.DomEvent.preventDefault(e); if (jobBounds) map.fitBounds(jobBounds, { padding: [30, 30] }); });
+      L.DomEvent.disableClickPropagation(c);
+      return c;
+    }
+  });
+  new FitControl().addTo(map);
+
+  /* ---------- mobile panel ---------- */
+  var toggle = $('panelToggle');
+  toggle.addEventListener('click', function () {
+    var open = document.body.classList.toggle('panel-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Hide' : 'Details & Tools';
+  });
+
+  /* ---------- load job ---------- */
+  var params = new URLSearchParams(location.search);
+  var slug = (params.get('job') || '').toLowerCase();
+  var hasJob = /^[a-z0-9][a-z0-9-]{2,80}$/.test(slug);
+  if (!hasJob) slug = '';
+  var base = '/view/' + slug + '/';
+
+  function loadJob() {
+    fetch(base + 'job.json', { cache: 'no-store', credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.status === 401) { showUnlock(); return null; }
+        if (r.status === 503) { showStatus('Temporarily unavailable', 'Project maps are being updated. Please try again shortly, or contact <a href="mailto:info@csraprecisionimaging.com">info@csraprecisionimaging.com</a>.'); return null; }
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (job) { if (job) { $('status').hidden = true; document.body.classList.remove('locked'); initJob(job); } })
+      .catch(function () { showStatus(); });
+  }
+
+  function showUnlock() {
+    if (hasJob) {
+      showStatus('Private project', 'Enter the access code we sent you for this project. You\'ll only need to do this once on this device.');
+      $('barTitle').textContent = 'Private project';
+    } else {
+      showStatus('Project Maps', 'Enter the access code from your project email or text to open your maps and findings.');
+      $('barTitle').textContent = 'Client access';
+    }
+    $('unlockForm').hidden = false;
+    setTimeout(function () { $('code').focus(); }, 50);
+  }
+
+  $('unlockForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = $('unlockBtn');
+    btn.disabled = true; btn.textContent = 'Checking…'; $('unlockErr').textContent = '';
+    fetch('/view/_auth', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ job: slug, code: $('code').value })
+    }).then(function (r) {
+      if (r.ok) {
+        return r.json().then(function (d) {
+          if (!hasJob && d && d.job) { location.href = '/view/?job=' + encodeURIComponent(d.job); return; }
+          $('unlockForm').hidden = true; loadJob();
+        });
+      }
+      $('unlockErr').textContent = r.status === 401
+        ? (hasJob ? 'That code didn\'t match this project. Check it and try again.' : 'That code wasn\'t recognized. Check it and try again.')
+        : 'Something went wrong. Please try again in a moment.';
+    }).catch(function () {
+      $('unlockErr').textContent = 'Connection problem. Please try again.';
+    }).then(function () { btn.disabled = false; btn.textContent = 'View Project'; });
+  });
+
+  $('signOut').addEventListener('click', function () {
+    fetch('/view/_logout', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ job: slug }) })
+      .then(function () { location.reload(); });
+  });
+
+  if (hasJob) loadJob(); else showUnlock();
+
+  var overlays = [], activeOverlay = null;
+
+  function initJob(job) {
+    document.title = (job.title || 'Project') + ' | CSRA Precision Imaging';
+    $('barTitle').textContent = job.title || 'Project';
+    $('jobTitle').textContent = job.title || 'Project';
+    $('jobSub').textContent = job.subtitle || '';
+    if (job.note) { $('jobNote').textContent = job.note; $('jobNote').hidden = false; }
+
+    (job.facts || []).forEach(function (f) {
+      var dt = document.createElement('dt'); dt.textContent = f.label;
+      var dd = document.createElement('dd'); dd.textContent = f.value;
+      $('jobFacts').append(dt, dd);
+    });
+
+    jobBounds = L.latLngBounds(job.bounds);
+    var padded = jobBounds.pad(0.05);
+
+    (job.layers || []).forEach(function (ly, i) {
+      var url = /^https?:\/\//.test(ly.tiles) ? ly.tiles : base + ly.tiles;
+      var t = L.tileLayer(url, {
+        minZoom: 0, maxZoom: 26,
+        minNativeZoom: ly.minZoom != null ? ly.minZoom : 12,
+        maxNativeZoom: ly.maxNativeZoom || 24,
+        bounds: padded, // don't request tiles outside the project
+        attribution: 'Project imagery © CSRA Precision Imaging, LLC'
+      });
+      overlays.push(t);
+
+      var row = document.createElement('label'); row.className = 'layer';
+      var input = document.createElement('input'); input.type = 'radio'; input.name = 'layer'; input.checked = i === 0;
+      var span = document.createElement('span'); span.textContent = ly.name || ('Layer ' + (i + 1));
+      row.append(input, span);
+      input.addEventListener('change', function () { if (input.checked) setOverlay(t); });
+      $('layerList').appendChild(row);
+    });
+    if (overlays.length) setOverlay(overlays[0]);
+    if (overlays.length < 2) $('layerList').hidden = true;
+
+    var dls = (job.downloads || []).filter(function (d) { return d && d.url; });
+    dls.forEach(function (d, i) {
+      var a = document.createElement('a');
+      a.className = 'btn ' + (i === 0 ? 'btn-primary' : 'btn-ghost');
+      a.href = d.url; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = d.label || 'Download';
+      $('dlList').appendChild(a);
+    });
+    $('dlSec').hidden = dls.length === 0;
+
+    setupThermal(job.thermal || []);
+
+    map.invalidateSize(); // panel may have just appeared
+    map.fitBounds(jobBounds, { padding: [30, 30] });
+  }
+
+  function setOverlay(t) {
+    if (activeOverlay) map.removeLayer(activeOverlay);
+    activeOverlay = t.addTo(map);
+    t.setOpacity($('opacity').value / 100);
+  }
+  $('opacity').addEventListener('input', function (e) {
+    $('opacityOut').textContent = e.target.value + '%';
+    if (activeOverlay) activeOverlay.setOpacity(e.target.value / 100);
+  });
+
+  /* ---------- thermal findings ---------- */
+  // job.json → "thermal": [{ "file": "thermal/01.jpg", "caption": "...", "lat": 33.46, "lng": -81.97 }]
+  // lat/lng are optional: without them the pin comes from the photo's own GPS tag (EXIF).
+  var therm = [], pinLayer = L.layerGroup(), lbIndex = 0;
+
+  function setupThermal(list) {
+    list = list.filter(function (t) { return t && t.file; });
+    if (!list.length) return;
+    $('thermSec').hidden = false;
+    list.forEach(function (t, i) {
+      var src = /^https?:\/\//.test(t.file) ? t.file : base + t.file.replace(/^\/+/, '');
+      var item = { src: src, caption: t.caption || '', n: i + 1, latlng: null, marker: null };
+      therm.push(item);
+
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'thumb';
+      var img = document.createElement('img'); img.loading = 'lazy'; img.src = src; img.alt = item.caption || ('Thermal image ' + item.n);
+      var txt = document.createElement('div');
+      var n = document.createElement('div'); n.className = 'n'; n.textContent = 'IMAGE ' + item.n;
+      var c = document.createElement('div'); c.className = 'c'; c.textContent = item.caption;
+      txt.append(n, c); b.append(img, txt);
+      b.addEventListener('click', function () { openLb(i); });
+      $('thermList').appendChild(b);
+
+      if (isFinite(t.lat) && isFinite(t.lng) && t.lat !== null && t.lng !== null) addPin(item, L.latLng(+t.lat, +t.lng));
+      else fetch(src, { credentials: 'same-origin' })
+        .then(function (r) { return r.ok ? r.arrayBuffer() : null; })
+        .then(function (buf) { var g = buf && readGps(buf); if (g) addPin(item, L.latLng(g.lat, g.lng)); })
+        .catch(function () {});
+    });
+    pinLayer.addTo(map);
+  }
+
+  function addPin(item, ll) {
+    item.latlng = ll;
+    item.marker = L.marker(ll, {
+      icon: L.divIcon({ className: '', html: '<div class="pin"><span>' + item.n + '</span></div>', iconSize: [28, 28], iconAnchor: [14, 30] }),
+      title: 'Thermal image ' + item.n, keyboard: true
+    }).on('click', function () { if (!mMode) openLb(item.n - 1); });
+    pinLayer.addLayer(item.marker);
+  }
+
+  $('pinToggle').addEventListener('change', function (e) {
+    if (e.target.checked) pinLayer.addTo(map); else map.removeLayer(pinLayer);
+  });
+
+  function highlight(i) {
+    therm.forEach(function (t, k) {
+      var el = t.marker && t.marker.getElement();
+      if (el && el.firstChild) el.firstChild.classList.toggle('active', k === i);
+    });
+  }
+  function showLb(i) {
+    lbIndex = (i + therm.length) % therm.length;
+    var t = therm[lbIndex];
+    $('lbImg').src = t.src; $('lbImg').alt = t.caption || ('Thermal image ' + t.n);
+    $('lbCap').textContent = t.caption;
+    $('lbCount').textContent = 'Thermal image ' + t.n + ' of ' + therm.length;
+    $('lbMap').hidden = !t.latlng;
+    var multi = therm.length > 1; $('lbPrev').hidden = !multi; $('lbNext').hidden = !multi;
+    highlight(lbIndex);
+  }
+  function openLb(i) { showLb(i); $('lb').hidden = false; $('lbClose').focus(); }
+  function closeLb() { $('lb').hidden = true; }
+  $('lbClose').addEventListener('click', closeLb);
+  $('lbPrev').addEventListener('click', function () { showLb(lbIndex - 1); });
+  $('lbNext').addEventListener('click', function () { showLb(lbIndex + 1); });
+  $('lb').addEventListener('click', function (e) { if (e.target === this || e.target.classList.contains('lb-stage')) closeLb(); });
+  $('lbMap').addEventListener('click', function () {
+    var t = therm[lbIndex]; if (!t.latlng) return;
+    closeLb();
+    if (!$('pinToggle').checked) { $('pinToggle').checked = true; pinLayer.addTo(map); }
+    if (window.matchMedia('(max-width:820px)').matches) { document.body.classList.remove('panel-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Details & Tools'; }
+    map.setView(t.latlng, Math.max(map.getZoom(), 22));
+    highlight(lbIndex);
+  });
+  document.addEventListener('keydown', function (e) {
+    if ($('lb').hidden) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') showLb(lbIndex - 1);
+    if (e.key === 'ArrowRight') showLb(lbIndex + 1);
+  });
+
+  // Minimal EXIF GPS reader for JPEGs (DJI / FLIR exports keep the drone's GPS tag)
+  function readGps(buf) {
+    var v = new DataView(buf), off = 2;
+    if (v.byteLength < 4 || v.getUint16(0) !== 0xFFD8) return null;
+    while (off + 4 < v.byteLength) {
+      var marker = v.getUint16(off), size = v.getUint16(off + 2);
+      if (marker === 0xFFE1 && v.getUint32(off + 4) === 0x45786966) return parseExif(v, off + 10);
+      if ((marker & 0xFF00) !== 0xFF00 || marker === 0xFFDA) break;
+      off += 2 + size;
+    }
+    return null;
+  }
+  function parseExif(v, t) {
+    try {
+      var le = v.getUint16(t) === 0x4949;
+      var u16 = function (o) { return v.getUint16(t + o, le); }, u32 = function (o) { return v.getUint32(t + o, le); };
+      var ifd0 = u32(4), n = u16(ifd0), gpsOff = 0;
+      for (var i = 0; i < n; i++) { var e = ifd0 + 2 + i * 12; if (u16(e) === 0x8825) gpsOff = u32(e + 8); }
+      if (!gpsOff) return null;
+      var g = {}, m = u16(gpsOff);
+      for (var j = 0; j < m; j++) {
+        var en = gpsOff + 2 + j * 12, tag = u16(en), type = u16(en + 2), valOff = u32(en + 8);
+        if (tag === 1 || tag === 3) g[tag] = String.fromCharCode(v.getUint8(t + en + 8));
+        if ((tag === 2 || tag === 4) && type === 5) {
+          var r = function (k) { return u32(valOff + k * 8) / u32(valOff + k * 8 + 4); };
+          g[tag] = r(0) + r(1) / 60 + r(2) / 3600;
+        }
+      }
+      if (!isFinite(g[2]) || !isFinite(g[4])) return null;
+      var lat = g[2] * (g[1] === 'S' ? -1 : 1), lng = g[4] * (g[3] === 'W' ? -1 : 1);
+      if (!lat && !lng) return null;
+      return { lat: lat, lng: lng };
+    } catch (err) { return null; }
+  }
+
+  /* ---------- measure tool ---------- */
+  var mMode = null, mPts = [], mGroup = L.layerGroup().addTo(map), mShape = null, mGhost = null, mTip = null;
+  var AMBER = '#f4a023';
+
+  function setMeasureButtons() {
+    document.querySelectorAll('[data-measure]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.measure === mMode));
+    });
+    $('mHint').hidden = !mMode;
+    $('mFinish').hidden = !mMode;
+    document.body.classList.toggle('measuring', !!mMode);
+  }
+  function readout(big, small) { $('mBig').textContent = big; $('mSmall').textContent = small; }
+
+  function clearMeasure() {
+    mGroup.clearLayers(); mPts = []; mShape = mGhost = mTip = null;
+  }
+  function startMeasure(mode) {
+    clearMeasure();
+    mMode = mode;
+    map.doubleClickZoom.disable();
+    readout('—', mode === 'distance' ? 'Tap points along the line.' : 'Tap the corners of the area (3 or more).');
+    setMeasureButtons();
+    if (window.matchMedia('(max-width:820px)').matches) { document.body.classList.remove('panel-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Details & Tools'; }
+  }
+  function stopMeasure() {
+    mMode = null;
+    if (mGhost) { mGroup.removeLayer(mGhost); mGhost = null; }
+    map.doubleClickZoom.enable();
+    setMeasureButtons();
+  }
+  function redraw(extra) {
+    var pts = extra ? mPts.concat([extra]) : mPts.slice();
+    if (mShape) mGroup.removeLayer(mShape);
+    if (mMode === 'area' || (!mMode && mShape instanceof L.Polygon)) {
+      mShape = L.polygon(pts, { color: AMBER, weight: 2.5, fillColor: AMBER, fillOpacity: .18, interactive: false });
+    } else {
+      mShape = L.polyline(pts, { color: AMBER, weight: 3, interactive: false });
+    }
+    mGroup.addLayer(mShape);
+    update(pts);
+  }
+  function update(pts) {
+    var r, label;
+    if ((mShape instanceof L.Polygon)) {
+      if (pts.length < 3) { readout('—', 'Add at least 3 points.'); return; }
+      r = fmtArea(geodesicArea(pts));
+      var per = fmtLength(pathLength(pts.concat([pts[0]])));
+      readout(r.big, r.small + ' · perimeter ' + per.big);
+      label = r.big;
+    } else {
+      if (pts.length < 2) { readout('—', 'Tap the next point.'); return; }
+      r = fmtLength(pathLength(pts));
+      readout(r.big, r.small);
+      label = r.big;
+    }
+    var at = pts[pts.length - 1];
+    if (!mTip) { mTip = L.tooltip({ permanent: true, direction: 'right', offset: [10, 0], className: 'm-tip' }); }
+    mTip.setLatLng(at).setContent(label);
+    if (!mGroup.hasLayer(mTip)) mGroup.addLayer(mTip);
+  }
+
+  map.on('click', function (e) {
+    if (!mMode) return;
+    mPts.push(e.latlng);
+    mGroup.addLayer(L.circleMarker(e.latlng, { radius: 4, color: '#1c2430', weight: 2, fillColor: AMBER, fillOpacity: 1, interactive: false }));
+    redraw();
+  });
+  map.on('mousemove', function (e) {
+    if (!mMode || !mPts.length) return;
+    redraw(e.latlng);
+  });
+  function finish() {
+    // a double-click also fires two clicks; drop duplicate trailing points
+    while (mPts.length > 1 && map.latLngToContainerPoint(mPts[mPts.length - 1]).distanceTo(map.latLngToContainerPoint(mPts[mPts.length - 2])) < 4) mPts.pop();
+    redraw(); stopMeasure();
+  }
+  map.on('dblclick', function () { if (mMode) finish(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && mMode) { clearMeasure(); stopMeasure(); readout('—', 'Measurement cancelled.'); }
+    if (e.key === 'Enter' && mMode) finish();
+  });
+  $('mFinish').addEventListener('click', finish);
+
+  document.querySelectorAll('[data-measure]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var m = b.dataset.measure;
+      if (m === 'clear') { clearMeasure(); stopMeasure(); readout('—', 'Choose Distance or Area, then tap points on the map.'); return; }
+      if (mMode === m) { finish(); return; }
+      startMeasure(m);
+    });
+  });
+})();
+</script>
+</body>
+</html>

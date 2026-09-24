@@ -3,8 +3,10 @@
 
    Every request under /view/<project>/ (job.json AND every map tile)
    must carry a valid unlock cookie for that project, or it gets a 401.
-   The viewer shell (/view/, /view/index.html) and /view/lib/ stay public;
-   they contain no client data.
+   The viewer shell (/view/, /view/index.html), /view/admin.html, and
+   /view/lib/ stay public; they contain no client data. admin.html itself
+   fetches its project list from /view/admin-index/projects.json, which
+   IS locked — same mechanism as any other project (see below).
 
    Settings (Vercel → Project → Settings → Environment Variables,
    set for Production AND Preview):
@@ -74,7 +76,7 @@ export default async function middleware(req) {
 
   // Public: the viewer shell and its library files
   const plain = !/%|\.\./.test(path); // no encoded characters or dot-segments
-  if (path === '/view' || path === '/view/' || path === '/view/index.html' || (plain && path.startsWith('/view/lib/'))) {
+  if (path === '/view' || path === '/view/' || path === '/view/index.html' || path === '/view/admin.html' || (plain && path.startsWith('/view/lib/'))) {
     return pass();
   }
 
