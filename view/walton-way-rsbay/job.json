@@ -1,0 +1,19 @@
+{
+  "title": "Walton Way",
+  "subtitle": "Orthomosaic · Walton Way, Augusta, GA",
+  "facts": [
+    { "label": "Processed", "value": "Sept 23, 2026" },
+    { "label": "Ground resolution", "value": "0.33 cm/px (0.13 in)" },
+    { "label": "Area covered", "value": "≈ 0.94 acres" },
+    { "label": "Images", "value": "930" },
+    { "label": "Position accuracy", "value": "± 0.3 m (GPS)" }
+  ],
+  "note": "",
+  "bounds": [[33.469095, -81.973932], [33.469804, -81.973123]],
+  "layers": [
+    { "name": "RGB orthomosaic", "tiles": "tiles/{z}/{x}/{y}.png", "minZoom": 12, "maxNativeZoom": 24 }
+  ],
+  "downloads": [
+    { "label": "Full-resolution GeoTIFF", "url": "" }
+  ]
+}
