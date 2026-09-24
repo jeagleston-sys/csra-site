@@ -12,6 +12,8 @@
       links.classList.toggle('open');
     });
     links.querySelectorAll('a').forEach(function (a) {
+      // dropdown toggles (Services, Client Login) open their submenu instead of closing the menu
+      if (a.classList.contains('ddtoggle')) return;
       a.addEventListener('click', function () { links.classList.remove('open'); });
     });
   }

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect width="800" height="600" fill="#1c2430"/>
+<rect x="60" y="40" width="680" height="520" rx="8" fill="#252f3d" stroke="#f4a023" stroke-opacity="0.3" stroke-width="2"/>
+<rect x="90" y="80" width="300" height="18" rx="3" fill="#f4a023" fill-opacity="0.7"/>
+<rect x="90" y="110" width="450" height="10" rx="2" fill="#8ea0b8" fill-opacity="0.5"/>
+<rect x="90" y="130" width="380" height="10" rx="2" fill="#8ea0b8" fill-opacity="0.5"/>
+<rect x="90" y="170" width="280" height="180" rx="4" fill="#3a5068" fill-opacity="0.6"/>
+<rect x="400" y="170" width="280" height="180" rx="4" fill="#3a5068" fill-opacity="0.6"/>
+<rect x="90" y="380" width="590" height="10" rx="2" fill="#8ea0b8" fill-opacity="0.5"/>
+<rect x="90" y="400" width="500" height="10" rx="2" fill="#8ea0b8" fill-opacity="0.5"/>
+<text x="50%" y="500" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="24" fill="#fff" fill-opacity="0.92">Sample Report Page</text>
+<text x="50%" y="524" text-anchor="middle" font-family="Arial" font-size="14" fill="#fff" fill-opacity="0.7">Replace with a real report screenshot</text>
+</svg>

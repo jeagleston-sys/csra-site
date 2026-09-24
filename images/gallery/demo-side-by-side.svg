@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<defs>
+<radialGradient id="t2" cx="42%" cy="46%" r="60%">
+<stop offset="0%" stop-color="#fff2c2"/><stop offset="22%" stop-color="#f4a023"/>
+<stop offset="48%" stop-color="#c0392b"/><stop offset="72%" stop-color="#5b2c83"/>
+<stop offset="100%" stop-color="#10204a"/>
+</radialGradient>
+<linearGradient id="r2" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#3a5068"/><stop offset="100%" stop-color="#10151d"/>
+</linearGradient>
+</defs>
+<rect width="400" height="600" fill="url(#r2)"/>
+<rect x="400" width="400" height="600" fill="url(#t2)"/>
+<line x1="400" y1="0" x2="400" y2="600" stroke="#fff" stroke-opacity="0.6" stroke-width="2"/>
+<text x="200" y="34" text-anchor="middle" font-family="monospace" font-size="16" fill="#fff" fill-opacity="0.85">RGB</text>
+<text x="600" y="34" text-anchor="middle" font-family="monospace" font-size="16" fill="#fff" fill-opacity="0.85">THERMAL</text>
+<text x="50%" y="50%" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="26" fill="#fff" fill-opacity="0.92">RGB vs. Thermal Comparison</text>
+<text x="50%" y="56%" text-anchor="middle" font-family="Arial" font-size="16" fill="#fff" fill-opacity="0.7">Replace with your demo photo</text>
+</svg>

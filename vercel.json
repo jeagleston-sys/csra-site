@@ -1,14 +1,34 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "**/*", "use": "@vercel/static" }
-  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "index, follow" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/view/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/view/(.*)/tiles/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, max-age=2592000"
+        }
       ]
     }
   ]
