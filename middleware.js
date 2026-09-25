@@ -123,6 +123,23 @@ export default async function middleware(req) {
     });
   }
 
+  // Admin-only: GET /view/_codes — returns every project's access code, so
+  // admin.html can show Justin a client's code if they lose it, without a
+  // trip to Vercel (which can't display a saved Secret value back anyway).
+  // Requires the SAME unlock cookie as any other project — "admin-index" is
+  // just another entry in PORTAL_CODES, checked exactly like the rest.
+  if (path === '/view/_codes') {
+    if (req.method !== 'GET') return json(405, { error: 'method' });
+    const adminCookie = getCookie(req, cookieName('admin-index'));
+    if (!adminCookie || !Object.prototype.hasOwnProperty.call(codes, 'admin-index')) return locked();
+    const expectedAdminToken = await sign('admin-index', codes['admin-index']);
+    if (!safeEqual(adminCookie, expectedAdminToken)) return locked();
+    // Don't echo the admin's own code back in the client-project list
+    const clientCodes = {};
+    for (const k of Object.keys(codes)) { if (k !== 'admin-index') clientCodes[k] = codes[k]; }
+    return json(200, { codes: clientCodes });
+  }
+
   // Everything in a project folder is locked
   const m = path.match(/^\/view\/([^/]+)\//);
   if (!m) return locked();

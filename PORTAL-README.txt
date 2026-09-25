@@ -42,6 +42,12 @@ Admin index (your own bookmark, not for clients)
 - Lists every project in view/admin-index/projects.json as a clickable
   link straight to /view/?job=<slug> — no more digging through Vercel or
   remembering job-folder slugs.
+- Also shows each project's access code (with a Copy button) — for when
+  a client loses theirs. Vercel can't show a saved Secret value back to
+  you once set, so this reads it straight from the running server via a
+  separate admin-only endpoint (GET /view/_codes) instead. That endpoint
+  requires the same admin-index unlock cookie as the page itself, and
+  never returns the admin-index code in its own list.
 - Protected by its own code, same mechanism as any client project: add
   "admin-index":"<code you pick>" to PORTAL_CODES in Vercel. Pick something
   you'll actually remember — this one's just for you, not auto-generated.

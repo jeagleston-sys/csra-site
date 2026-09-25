@@ -42,11 +42,18 @@ h1{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:2.1rem;letter-spacin
 
 /* project list */
 .proj{display:block;background:var(--navy);border:1px solid var(--hairline);border-radius:10px;padding:18px 20px;margin-bottom:12px;
-  text-decoration:none;transition:border-color .2s}
+  transition:border-color .2s}
 .proj:hover{border-color:var(--border)}
 .proj .t{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:1.3rem;letter-spacing:.03em;color:var(--white)}
 .proj .meta{color:var(--muted);font-size:.86rem;margin-top:4px}
-.proj .go{float:right;color:var(--amber);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.proj .go{float:right;color:var(--amber);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none}
+.proj .go:hover{text-decoration:underline}
+.code-row{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--hairline)}
+.code-label{font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.code-val{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.04em;color:var(--white);background:var(--navy-deep);padding:4px 10px;border-radius:4px;flex:1}
+.copy-btn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--amber);background:none;border:1px solid rgba(244,160,35,.4);border-radius:4px;padding:5px 10px;cursor:pointer;transition:background .2s}
+.copy-btn:hover{background:rgba(244,160,35,.1)}
 .empty{color:var(--muted);font-size:.92rem}
 .signout{margin-top:24px;font-size:.82rem;color:var(--muted)}
 .signout button{background:none;border:none;color:var(--amber);text-decoration:underline;cursor:pointer;font:inherit}
@@ -79,8 +86,9 @@ h1{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:2.1rem;letter-spacin
   var btnEl = document.getElementById('unlockBtn');
   var signoutRow = document.getElementById('signoutRow');
 
-  function renderProjects(data) {
+  function renderProjects(data, codes) {
     var projects = (data && data.projects) || [];
+    codes = codes || {};
     if (!projects.length) {
       listEl.innerHTML = '<p class="empty">No active projects yet.</p>';
     } else {
@@ -89,12 +97,27 @@ h1{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:2.1rem;letter-spacin
         if (p.client) meta.push(p.client);
         if (p.processed) meta.push('Processed ' + p.processed);
         if (p.note) meta.push(p.note);
-        return '<a class="proj" href="/view/?job=' + encodeURIComponent(p.slug) + '">' +
-          '<span class="go">Open →</span>' +
+        var code = codes[p.slug];
+        var codeRow = code
+          ? '<div class="code-row"><span class="code-label">Code</span><code class="code-val">' + code +
+            '</code><button type="button" class="copy-btn" data-code="' + code + '">Copy</button></div>'
+          : '';
+        return '<div class="proj">' +
+          '<a class="go" href="/view/?job=' + encodeURIComponent(p.slug) + '">Open →</a>' +
           '<div class="t">' + (p.title || p.slug) + '</div>' +
           '<div class="meta">' + meta.join(' · ') + '</div>' +
-          '</a>';
+          codeRow +
+          '</div>';
       }).join('');
+      listEl.querySelectorAll('.copy-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          navigator.clipboard.writeText(btn.getAttribute('data-code')).then(function () {
+            var orig = btn.textContent;
+            btn.textContent = 'Copied';
+            setTimeout(function () { btn.textContent = orig; }, 1500);
+          });
+        });
+      });
     }
     listEl.hidden = false;
     formEl.hidden = true;
@@ -104,7 +127,16 @@ h1{font-family:'Bebas Neue','Rajdhani',sans-serif;font-size:2.1rem;letter-spacin
   function tryLoad() {
     return fetch('/view/admin-index/projects.json', { cache: 'no-store', credentials: 'same-origin' })
       .then(function (r) {
-        if (r.ok) return r.json().then(renderProjects);
+        if (r.ok) {
+          return r.json().then(function (data) {
+            // Codes are a separate, admin-only endpoint — a missing/failed
+            // fetch here still shows the project list, just without codes.
+            return fetch('/view/_codes', { cache: 'no-store', credentials: 'same-origin' })
+              .then(function (cr) { return cr.ok ? cr.json() : { codes: {} }; })
+              .catch(function () { return { codes: {} }; })
+              .then(function (cd) { renderProjects(data, cd.codes); });
+          });
+        }
         if (r.status === 401) { formEl.hidden = false; listEl.hidden = true; signoutRow.hidden = true; return; }
         throw new Error('load-failed');
       })
