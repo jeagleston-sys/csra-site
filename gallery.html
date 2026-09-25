@@ -49,9 +49,14 @@
 
     <div class="gal-filters" role="tablist" aria-label="Filter gallery">
       <button class="filter active" data-filter="all">All</button>
-      <button class="filter" data-filter="thermal">🔥 Thermal</button>
       <button class="filter" data-filter="rgb">📷 RGB</button>
+      <!-- Thermal and 3D Models filters hidden per Justin's request (2026-09-24) —
+           no live items in those categories right now, and an empty filtered
+           grid looks broken to a visitor. Restore both buttons below once at
+           least one thermal or 3D item is uncommented above.
+      <button class="filter" data-filter="thermal">🔥 Thermal</button>
       <button class="filter" data-filter="3d">🧊 3D Models</button>
+      -->
     </div>
 
     <!-- Masonry gallery. Each .item: data-cat = thermal | rgb | 3d.
@@ -59,9 +64,16 @@
          To add photos: drop files in images/gallery/ and copy an .item block. -->
     <div class="gallery">
       <figure class="item" data-cat="rgb"><span class="pill rgb">RGB</span><img src="images/gallery/rgb-commercial-roof-02.jpg" alt="Fully stitched RGB orthomosaic of a commercial roof from 930 high-resolution drone images" loading="lazy"><figcaption class="cap">Commercial roof assessment<br><span style="font-weight:400;opacity:.85">Stitched orthomosaic from 930 images · 0.33 cm/px</span></figcaption></figure>
+      <figure class="item" data-cat="rgb"><span class="pill rgb">RGB</span><img src="images/gallery/rgb-residential-roof-02.jpg" alt="High-resolution RGB residential roof orthomosaic" loading="lazy"><figcaption class="cap">Residential roof — RGB</figcaption></figure>
+      <!-- Placeholder gallery items removed per Justin's request (2026-09-24) —
+           only real, authorized work stays visible; a half-empty gallery reads
+           as an unfinished/inexperienced business to prospects. Re-add each item
+           below once a real photo/render exists: swap the .svg src for the real
+           file (same convention as images/README.txt), update the caption, then
+           uncomment this whole block.
+
       <figure class="item" data-cat="thermal"><span class="pill thermal">Thermal</span><img src="images/gallery/thermal-roof-01.svg" alt="Thermal roof moisture assessment — Augusta GA" loading="lazy"><figcaption class="cap">Roof moisture scan — residential</figcaption></figure>
       <figure class="item" data-cat="3d"><span class="pill threed">3D</span><img src="images/gallery/3d-roof-01.svg" alt="3D roof model from drone photogrammetry" loading="lazy"><figcaption class="cap">3D roof model</figcaption></figure>
-      <figure class="item" data-cat="rgb"><span class="pill rgb">RGB</span><img src="images/gallery/rgb-residential-roof-02.jpg" alt="High-resolution RGB residential roof orthomosaic" loading="lazy"><figcaption class="cap">Residential roof — RGB</figcaption></figure>
       <figure class="item" data-cat="thermal"><span class="pill thermal">Thermal</span><img src="images/gallery/thermal-deer-01.svg" alt="Infrared deer recovery at night" loading="lazy"><figcaption class="cap">Deer recovery — night thermal</figcaption></figure>
       <figure class="item" data-cat="thermal"><span class="pill thermal">Thermal</span><img src="images/gallery/thermal-hog-01.svg" alt="Thermal feral hog detection on farmland" loading="lazy"><figcaption class="cap">Feral hog detection</figcaption></figure>
       <figure class="item" data-cat="3d"><span class="pill threed">3D</span><img src="images/gallery/3d-property-01.svg" alt="3D property map from aerial drone mapping" loading="lazy"><figcaption class="cap">Property 3D map</figcaption></figure>
@@ -71,6 +83,8 @@
       <figure class="item" data-cat="thermal"><span class="pill thermal">Thermal</span><img src="images/gallery/thermal-roof-03.svg" alt="Commercial flat roof thermal assessment" loading="lazy"><figcaption class="cap">Commercial flat roof</figcaption></figure>
       <figure class="item" data-cat="rgb"><span class="pill rgb">RGB</span><img src="images/gallery/rgb-commercial-01.svg" alt="Commercial site aerial RGB photo" loading="lazy"><figcaption class="cap">Commercial site</figcaption></figure>
       <figure class="item" data-cat="thermal"><span class="pill thermal">Thermal</span><img src="images/gallery/thermal-field-01.svg" alt="Thermal wildlife count over a field" loading="lazy"><figcaption class="cap">Field wildlife count</figcaption></figure>
+      -->
+
     </div>
   </div>
 </section>
